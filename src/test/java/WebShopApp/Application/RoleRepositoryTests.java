@@ -16,12 +16,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class RoleRepositoryTests {
 
     @Autowired
-    private RoleRepository repository;
+    private RoleRepository roleRepository;
 
     @Test
     public void testCreateRole() {
         Role roleAdmin = new Role("Admin");
-        Role savedRole = this.repository.save(roleAdmin);
+        Role savedRole = this.roleRepository.save(roleAdmin);
 
         assertThat(savedRole.getId()).isGreaterThan(0);
     }
