@@ -28,6 +28,7 @@ public class UserRepositoryTests {
     public void testCreateUserWithAdminRole() {
         User adminUser = new User("dawid.korbecki@test.com","test","Dawid","Korbecki");
         Role adminRole = testEntityManager.find(Role.class, 1);
+
         adminUser.addRole(adminRole);
 
         User newAdminUser = userRepository.save(adminUser);
@@ -37,6 +38,24 @@ public class UserRepositoryTests {
         assertThat(newAdminUser.getPassword()).isEqualTo("test");
         assertThat(newAdminUser.getFirstName()).isEqualTo("Dawid");
         assertThat(newAdminUser.getLastName()).isEqualTo("Korbecki");
+    }
+
+    @Test
+    public void testCreateUserWithTwoRoles() {
+        User userWithTwoRoles = new User("jan.kowalski@test.com","test","Jan","Kowalski");
+        Role adminRole = testEntityManager.find(Role.class, 1);
+        Role supplierRole = testEntityManager.find(Role.class, 2);
+
+        userWithTwoRoles.addRole(adminRole);
+        userWithTwoRoles.addRole(supplierRole);
+
+        User newUserWithTwoRoles = userRepository.save(userWithTwoRoles);
+
+        assertThat(newUserWithTwoRoles.getId()).isGreaterThan(0);
+        assertThat(newUserWithTwoRoles.getEmail()).isEqualTo("jan.kowalski@test.com");
+        assertThat(newUserWithTwoRoles.getPassword()).isEqualTo("test");
+        assertThat(newUserWithTwoRoles.getFirstName()).isEqualTo("Jan");
+        assertThat(newUserWithTwoRoles.getLastName()).isEqualTo("Kowalski");
     }
 
     @Test
