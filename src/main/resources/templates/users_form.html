@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale = 1.0, minimal-scale = 1.0">
+
+    <title>Create new user</title>
+
+    <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <script type="text/javascript" th:src="@{/webjars/jquery/bootstrap/js/bootstrap.min.js}"></script>
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css" rel="stylesheet"/>
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.js"></script>
+
+</head>
+<body>
+<div class="container-fluid">
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" th:href="@{/}">WebShop App</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="topNavbar">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link" th:href="@{/users}">Users</a>
+                    <a class="nav-item nav-link" th:href="@{/categories}">Categories</a>
+                    <a class="nav-item nav-link" th:href="@{/products}">Products</a>
+                    <a class="nav-item nav-link" th:href="@{/orders}">Orders</a>
+                    <a class="nav-item nav-link" th:href="@{/settings}">Settings</a>
+                    <a class="nav-item nav-link" th:href="@{/dashboards}">Dashboards</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="text-center">
+        <h2 class="bold">Create new user</h2>
+    </div>
+    <form th:action="@{/users/save}" method="post"
+          style="max-width: 700px; margin: 0 auto" th:object="${user}">
+        <div class="border border-5 rounded p-3">
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">First Name:</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control"
+                           th:field="*{firstName}" required minlength="3" maxlength="24"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Last Name:</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control"
+                           th:field="*{lastName}" required minlength="3" maxlength="24"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">E-mail:</label>
+                <div class="col-sm-8">
+                    <input type="email" class="form-control"
+                           th:field="*{email}" required minlength="3" maxlength="48"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Password:</label>
+                <div class="col-sm-8">
+                    <input type="password" class="form-control"
+                           th:field="*{password}" required minlength="8" maxlength="48"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Roles:</label>
+                <div class="m-2">
+                    <th:block th:each="role : ${listRoles}">
+                        <input class="form-check-input" type="checkbox" th:field="*{roles}"
+                               th:text="${role.name}" th:value="${role.id}"/><br>
+                    </th:block>
+                </div>
+            </div>
+            <div class="text-center">
+                <label class="col-form-label">Enable the account ? </label>
+                <div>
+                    <input class="form-check-input" type="checkbox" th:field="*{status}"/>
+                </div>
+            </div>
+            <div class="text-center">
+                <div class="m-3">
+                    <input type="submit" value="CREATE" class="btn btn-primary"/>
+                    <input type="button" value="CANCEL" class="btn btn-warning" id="buttonCancel"/>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#buttonCancel').on("click", function () {
+            window.location = "[[@{/users}]]";
+        })
+    })
+</script>
+</body>
+</html>

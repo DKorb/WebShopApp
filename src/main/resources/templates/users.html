@@ -39,49 +39,55 @@
             </div>
         </nav>
     </div>
-
+    <div class="alert alert-success" role="alert" th:if="${message != null}">
+        [[${message}]]
+    </div>
+    <div class="m-3">
+        <a th:href="@{/users/new}" type="submit" class="btn btn-outline-primary" data-mdb-ripple-color="dark">
+            Create user</a>
+    </div>
     <div>
         <table class="table align-middle mb-0 bg-white">
             <thead class="bg-light">
-                <tr>
-                    <th>User ID</th>
-                    <th>E-mail</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Roles</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                </tr>
+            <tr>
+                <th>User ID</th>
+                <th>E-mail</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Roles</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
             </thead>
             <tbody>
-                <tr th:each="user : ${usersList}">
-                    <td>
-                        [[${user.id}]]
-                    </td>
-                    <td>
-                        [[${user.email}]]
-                    </td>
-                    <td>
-                        [[${user.firstName}]]
-                    </td>
-                    <td>
-                        [[${user.lastName}]]
-                    </td>
-                    <td>
-                        <span class="badge badge-primary rounded-pill d-inline">[[${user.roles}]]</span>
-                    </td>
-                    <td>
-                        [[${user.status}]]
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-link btn-sm btn-rounded">
-                            Edit
-                        </button>
-                        <button type="button" class="btn btn-link btn-sm btn-rounded">
-                            Delete
-                        </button>
-                    </td>
-                </tr>
+            <tr th:each="user : ${usersList}">
+                <td>
+                    [[${user.id}]]
+                </td>
+                <td>
+                    [[${user.email}]]
+                </td>
+                <td>
+                    [[${user.firstName}]]
+                </td>
+                <td>
+                    [[${user.lastName}]]
+                </td>
+                <td>
+                    <span class="badge badge-primary rounded-pill d-inline">[[${user.roles}]]</span>
+                </td>
+                <td>
+                    [[${user.status}]]
+                </td>
+                <td>
+                    <button type="button" class="btn btn-link btn-sm btn-rounded">
+                        Edit
+                    </button>
+                    <button type="button" class="btn btn-link btn-sm btn-rounded">
+                        Delete
+                    </button>
+                </td>
+            </tr>
             </tbody>
         </table>
     </div>
