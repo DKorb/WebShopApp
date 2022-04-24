@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.annotation.Rollback;
 
 import static org.assertj.core.api.Assertions.as;
@@ -77,5 +78,21 @@ public class UserRepositoryTests {
 
         assertThat(adminUser.getEmail()).isEqualTo(testEmail);
         assertThat(adminUser.isStatus()).isTrue();
+    }
+
+    @Test
+    public void createUserWithEncryptedPass() {
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = bCryptPasswordEncoder.encode("test");
+        User userWithEncryptedPass = new User("stefan.zeromski@test.com", encodedPassword,
+                "Stefan", "Zeromski");
+        userWithEncryptedPass.setStatus(true);
+        Role adminRole = testEntityManager.find(Role.class, 1);
+        userWithEncryptedPass.addRole(adminRole);
+
+        userRepository.save(userWithEncryptedPass);
+
+        assertThat(userWithEncryptedPass.isStatus()).isTrue();
+        assertThat(userWithEncryptedPass.getPassword()).isEqualTo(encodedPassword);
     }
 }
