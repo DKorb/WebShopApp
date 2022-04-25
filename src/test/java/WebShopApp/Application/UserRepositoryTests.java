@@ -81,7 +81,7 @@ public class UserRepositoryTests {
     }
 
     @Test
-    public void createUserWithEncryptedPass() {
+    public void testCreateUserWithEncryptedPass() {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = bCryptPasswordEncoder.encode("test");
         User userWithEncryptedPass = new User("stefan.zeromski@test.com", encodedPassword,
@@ -94,5 +94,13 @@ public class UserRepositoryTests {
 
         assertThat(userWithEncryptedPass.isStatus()).isTrue();
         assertThat(userWithEncryptedPass.getPassword()).isEqualTo(encodedPassword);
+    }
+
+    @Test
+    public void testGetUserByEmail() {
+        String email = "dawid.korbecki@test.java";
+        User user = userRepository.getUserByEmail(email);
+
+        assertThat(user).isNotNull();
     }
 }
