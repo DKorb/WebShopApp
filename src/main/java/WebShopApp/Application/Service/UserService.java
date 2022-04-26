@@ -9,11 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
+@Transactional
 public class UserService {
 
     @Autowired
@@ -77,5 +78,9 @@ public class UserService {
         }
 
         userRepository.deleteById(id);
+    }
+
+    public void updateUserStatus(Integer id, boolean status) {
+        userRepository.updateStatus(id, status);
     }
 }

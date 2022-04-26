@@ -5,6 +5,7 @@ import WebShopApp.Application.Entity.User;
 import WebShopApp.Application.Exceptions.UserNotFoundException;
 import WebShopApp.Application.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -74,10 +75,22 @@ public class UserController {
         try {
             userService.delete(id);
             redirectAttributes.addFlashAttribute("message", "The user ID " + id
-                    + "has been deleted successfully");
+                    + " has been deleted successfully");
         } catch (UserNotFoundException ex) {
             redirectAttributes.addFlashAttribute("message", ex.getMessage());
         }
+        return "redirect:/users";
+    }
+
+    @GetMapping("/users/{id}/status/{status}")
+    public String changeStatus(@PathVariable("id") Integer id,
+                               @PathVariable("status") boolean status,
+                               RedirectAttributes redirectAttributes) {
+        userService.updateUserStatus(id, status);
+
+        String message = status ? "enabled" : "disabled";
+        redirectAttributes.addFlashAttribute("message", "The user ID " + id +
+                " has been " + message);
         return "redirect:/users";
     }
 }

@@ -71,8 +71,10 @@
                     <span class="badge badge-primary rounded-pill d-inline">[[${user.roles}]]</span>
                 </td>
                 <td>
-                    <a th:if="${user.status == true}" class="far fa-check-square fa-2x" style="color: #3333FF"></a>
-                    <a th:if="${user.status == false}" class="far fa-check-square fa-2x" style="color: #D1D1D1"></a>
+                    <a th:if="${user.status == true}" th:href="@{'/users/' + ${user.id} + '/status/false'}"
+                       class="far fa-check-square fa-2x" style="color: #3333FF"></a>
+                    <a th:if="${user.status == false}" th:href="@{'/users/' + ${user.id} + '/status/true'}"
+                       class="far fa-check-square fa-2x" style="color: #D1D1D1"></a>
                 </td>
                 <td>
                     <a type="button" class="btn btn-link btn-sm btn-rounded" th:href="@{'/users/edit/' + ${user.id}}">
