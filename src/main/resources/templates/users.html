@@ -71,15 +71,16 @@
                     <span class="badge badge-primary rounded-pill d-inline">[[${user.roles}]]</span>
                 </td>
                 <td>
-                    [[${user.status}]]
+                    <a th:if="${user.status == true}" class="far fa-check-square fa-2x" style="color: #3333FF"></a>
+                    <a th:if="${user.status == false}" class="far fa-check-square fa-2x" style="color: #D1D1D1"></a>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-link btn-sm btn-rounded">
+                    <a type="button" class="btn btn-link btn-sm btn-rounded" th:href="@{'/users/edit/' + ${user.id}}">
                         Edit
-                    </button>
-                    <button type="button" class="btn btn-link btn-sm btn-rounded">
+                    </a>
+                    <a type="button" class="btn btn-link btn-sm btn-rounded">
                         Delete
-                    </button>
+                    </a>
                 </td>
             </tr>
             </tbody>
