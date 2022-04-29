@@ -6,8 +6,12 @@ import WebShopApp.Application.Exceptions.UserNotFoundException;
 import WebShopApp.Application.Repository.RoleRepository;
 import WebShopApp.Application.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -16,6 +20,8 @@ import java.util.NoSuchElementException;
 @Service
 @Transactional
 public class UserService {
+
+    public static final int USERS_PER_PAGE = 5;
 
     @Autowired
     private RoleRepository roleRepository;
@@ -82,5 +88,10 @@ public class UserService {
 
     public void updateUserStatus(Integer id, boolean status) {
         userRepository.updateStatus(id, status);
+    }
+
+    public Page<User> listByPage(int pageNumber) {
+        Pageable pageable = PageRequest.of(pageNumber - 1, USERS_PER_PAGE);
+        return userRepository.findAll(pageable);
     }
 }

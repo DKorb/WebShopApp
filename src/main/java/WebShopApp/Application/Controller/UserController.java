@@ -5,7 +5,7 @@ import WebShopApp.Application.Entity.User;
 import WebShopApp.Application.Exceptions.UserNotFoundException;
 import WebShopApp.Application.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,13 +21,18 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/users")
+/*    @GetMapping("/users")
     public String listAll(Model model) {
 
         List<User> usersList = userService.listAll();
         model.addAttribute("usersList", usersList);
 
         return "users";
+    }*/
+
+    @GetMapping("/users")
+    public String listFirstPage(Model model) {
+        return listByPage(1, model);
     }
 
     @GetMapping("/users/new")
@@ -92,5 +97,25 @@ public class UserController {
         redirectAttributes.addFlashAttribute("message", "The user ID " + id +
                 " has been " + message);
         return "redirect:/users";
+    }
+
+    @GetMapping("/users/page/{pageNumber}")
+    public String listByPage(@PathVariable(name = "pageNumber") int pageNumber, Model model) {
+
+        Page<User> page = userService.listByPage(pageNumber);
+        List<User> usersList = page.getContent();
+
+        long startCount = ((long) (pageNumber - 1) * UserService.USERS_PER_PAGE + 1);
+        long endCount = startCount + UserService.USERS_PER_PAGE - 1;
+
+        if (endCount > page.getTotalElements()) {
+            page.getTotalElements();
+        }
+
+        model.addAttribute("currentPage", pageNumber);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("usersList", usersList);
+
+        return "users";
     }
 }
