@@ -20,6 +20,10 @@
     <div>
         <form th:action="@{/login}" method="post" style="max-width: 350px; margin: 350px auto 0;">
 
+            <div th:if="${param.error}">
+                <p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
+            </div>
+
             <div>
 
                 <p>
