@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale = 1.0, minimal-scale = 1.0">
@@ -10,12 +10,16 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css" rel="stylesheet"/>
     <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 
 </head>
 <body>
 <div class="container-fluid">
     <div>
+        <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutAction">
+            <input th:type="submit"/>
+        </form>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" th:href="@{/}">WebShop App</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNavbar">
@@ -30,6 +34,26 @@
                     <a class="nav-item nav-link" th:href="@{/settings}">Settings</a>
                     <a class="nav-item nav-link" th:href="@{/dashboards}">Dashboards</a>
                 </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false"
+                               sec:authentication="principal.accountName">
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
+                                <li>
+                                    <a class="dropdown-item" id="logoutItem">Logout</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </nav>
         <h1>WebShop Admin Panel</h1>
@@ -38,5 +62,13 @@
         <p>WebShop Control Panel - Copyright &copy; Dawid Korbecki</p>
     </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#logoutItem").on("click", function (e) {
+            e.preventDefault();
+            document.logoutAction.submit();
+        })
+    });
+</script>
 </body>
 </html>
