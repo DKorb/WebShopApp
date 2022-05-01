@@ -58,4 +58,8 @@ public class SecurityUserDetails implements UserDetails {
     public boolean isEnabled() {
         return this.user.isStatus();
     }
+
+    public String getAccountName() {
+        return this.user.getFirstName() + " " + this.user.getLastName();
+    }
 }
