@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale = 1.0, minimal-scale = 1.0">
+
+    <title>WebShop Admin Panel</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css" rel="stylesheet"/>
+    <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+</head>
+<body>
+<div class="container-fluid">
+    <div>
+        <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutAction">
+            <input th:type="submit"/>
+        </form>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" th:href="@{/}">WebShop App</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="topNavbar">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link" th:href="@{/users}">Users</a>
+                    <a class="nav-item nav-link" th:href="@{/categories}">Categories</a>
+                    <a class="nav-item nav-link" th:href="@{/products}">Products</a>
+                    <a class="nav-item nav-link" th:href="@{/orders}">Orders</a>
+                    <a class="nav-item nav-link" th:href="@{/settings}">Settings</a>
+                    <a class="nav-item nav-link" th:href="@{/dashboards}">Dashboards</a>
+                </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false"
+                               sec:authentication="principal.accountName">
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
+                                <li>
+                                    <a class="dropdown-item" id="logoutItem">Logout</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="alert alert-success" role="alert" th:if="${message != null}">
+        [[${message}]]
+    </div>
+    <div class="m-3">
+        <a th:href="@{/categories/new}" type="submit" class="btn btn-outline-primary" data-mdb-ripple-color="dark">
+            Create category</a>
+    </div>
+    <div>
+        <table class="table align-middle mb-0 bg-white">
+            <thead class="bg-light">
+            <tr>
+                <th>ID</th>
+                <th>Category Image</th>
+                <th>Category Name</th>
+                <th>Alias</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="category : ${categoryList}">
+                <td>
+                    [[${category.id}]]
+                </td>
+                <td></td>
+                <td>
+                    [[${category.name}]]
+                </td>
+                <td>
+                    [[${category.alias}]]
+                </td>
+                <td>
+                    <a th:if="${category.status == true}" th:href="@{'/categories/' + ${category.id} + '/status/false'}"
+                       class="far fa-check-square fa-2x" style="color: #3333FF"></a>
+                    <a th:if="${category.status == false}" th:href="@{'/categories/' + ${category.id} + '/status/true'}"
+                       class="far fa-check-square fa-2x" style="color: #D1D1D1"></a>
+                </td>
+                <td>
+                    <a type="button" class="btn btn-link btn-sm btn-rounded"
+                       th:href="@{'/categories/edit/' + ${category.id}}">
+                        Edit
+                    </a>
+                    <a type="button" class="btn btn-link btn-sm btn-rounded"
+                       th:href="@{'/categories/delete/' + ${category.id}}">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!--    <div class="m-5">-->
+    <!--        <ul class="pagination justify-content-center">-->
+    <!--            <li th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}">-->
+    <!--                <a class="page-link" th:href="@{'/categories/page/' + ${currentPage - 1}}">Previous</a>-->
+    <!--            </li>-->
+
+    <!--            <li th:class="${currentPage != i ? 'page-item': 'page-item active'}"-->
+    <!--                th:each="i : ${#numbers.sequence(1, totalPages)}">-->
+    <!--                <a class="page-link" th:href="@{'/categories/page/' + ${i}}">[[${i}]]</a>-->
+    <!--            </li>-->
+
+    <!--            <li th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}">-->
+    <!--                <a class="page-link" th:href="@{'/categories/page/' + ${currentPage + 1}}">Next</a>-->
+    <!--            </li>-->
+    <!--        </ul>-->
+    <!--    </div>-->
+
+    <div class="text-center">
+        <p>WebShop Control Panel - Copyright &copy; Dawid Korbecki</p>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#logoutItem").on("click", function (e) {
+            e.preventDefault();
+            document.logoutAction.submit();
+        })
+    });
+</script>
+</body>
+</html>
