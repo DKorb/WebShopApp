@@ -32,11 +32,11 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public List<User> listAll() {
+    public List<User> listAllUsers() {
         return (List<User>) userRepository.findAll();
     }
 
-    public List<Role> listRoles() {
+    public List<Role> listAllRoles() {
         return (List<Role>) roleRepository.findAll();
     }
 

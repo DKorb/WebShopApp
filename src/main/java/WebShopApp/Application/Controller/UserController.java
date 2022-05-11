@@ -39,7 +39,7 @@ public class UserController {
     public String newUser(Model model) {
         User user = new User();
         user.setStatus(true);
-        List<Role> listRoles = userService.listRoles();
+        List<Role> listRoles = userService.listAllRoles();
 
         model.addAttribute("listRoles", listRoles);
         model.addAttribute("user", user);
@@ -61,7 +61,7 @@ public class UserController {
                            RedirectAttributes redirectAttributes) {
         try {
             User user = userService.get(id);
-            List<Role> listRoles = userService.listRoles();
+            List<Role> listRoles = userService.listAllRoles();
 
             model.addAttribute("user", user);
             model.addAttribute("listRoles", listRoles);
