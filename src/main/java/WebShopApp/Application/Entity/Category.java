@@ -29,13 +29,6 @@ public class Category {
     @Column
     private boolean status;
 
-    @OneToOne
-    @JoinColumn(name = "parent_id")
-    private Category parent;
-
-    @OneToMany(mappedBy = "parent")
-    private Set<Category> children = new HashSet<>();
-
     public Category(String name) {
         this.name = name;
         this.alias = name;
@@ -49,10 +42,11 @@ public class Category {
         this.id = id;
     }
 
-    public Category(String name, Category parent) {
-        this.name = name;
-        this.alias = name;
-        this.image = "default.png";
-        this.parent = parent;
+    @Transient
+    public String getImagePath() {
+        if (this.id == null) {
+            return "/images/image-thumbnail.png";
+        }
+        return "/category-images/" + this.id + "/" + this.image;
     }
 }

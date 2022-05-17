@@ -80,7 +80,9 @@
                 <td>
                     [[${category.id}]]
                 </td>
-                <td></td>
+                <td>
+                    <img th:src="@{${category.getImagePath()}}" style="width: 100px" class="img-fluid"/>
+                </td>
                 <td>
                     [[${category.name}]]
                 </td>

@@ -68,7 +68,7 @@ public class UserService {
         return false;
     }
 
-    public User get(Integer id) throws UserNotFoundException {
+    public User getUser(Integer id) throws UserNotFoundException {
         try {
             return userRepository.findById(id).get();
         } catch (NoSuchElementException ex) {
@@ -76,7 +76,7 @@ public class UserService {
         }
     }
 
-    public void delete(Integer id) throws UserNotFoundException {
+    public void deleteUser(Integer id) throws UserNotFoundException {
         Long countById = userRepository.countById(id);
 
         if (countById == null || countById == 0) {
