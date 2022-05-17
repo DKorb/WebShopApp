@@ -2,9 +2,12 @@ package WebShopApp.Application.Controller;
 
 import WebShopApp.Application.Controller.File.FileUploadUtil;
 import WebShopApp.Application.Entity.Category;
+import WebShopApp.Application.Entity.User;
 import WebShopApp.Application.Exceptions.CategoryNotFoundException;
 import WebShopApp.Application.Service.CategoryService;
+import WebShopApp.Application.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -24,12 +27,17 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    @GetMapping("/categories")
+/*    @GetMapping("/categories")
     public String listAllCategories(Model model) {
         List<Category> categoryList = categoryService.listAllCategories();
         model.addAttribute("categoryList", categoryList);
 
         return "categories";
+    }*/
+
+    @GetMapping("/categories")
+    public String listFirstPage(Model model) {
+        return listByPage(1, model);
     }
 
     @GetMapping("/categories/new")
@@ -109,6 +117,26 @@ public class CategoryController {
         redirectAttributes.addFlashAttribute("message", "The category ID " + id +
                 " has been " + message);
         return "redirect:/categories";
+    }
+
+    @GetMapping("/categories/page/{pageNumber}")
+    public String listByPage(@PathVariable(name = "pageNumber") int pageNumber, Model model) {
+
+        Page<Category> page = categoryService.listByPage(pageNumber);
+        List<Category> categoryList = page.getContent();
+
+        long startCount = ((long) (pageNumber - 1) * CategoryService.CATEGORY_PER_PAGE + 1);
+        long endCount = startCount + CategoryService.CATEGORY_PER_PAGE - 1;
+
+        if (endCount > page.getTotalElements()) {
+            page.getTotalElements();
+        }
+
+        model.addAttribute("currentCategoryPage", pageNumber);
+        model.addAttribute("totalCategoryPages", page.getTotalPages());
+        model.addAttribute("categoryList", categoryList);
+
+        return "categories";
     }
 
 }

@@ -1,9 +1,13 @@
 package WebShopApp.Application.Service;
 
 import WebShopApp.Application.Entity.Category;
+import WebShopApp.Application.Entity.User;
 import WebShopApp.Application.Exceptions.CategoryNotFoundException;
 import WebShopApp.Application.Repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -13,6 +17,8 @@ import java.util.NoSuchElementException;
 @Service
 @Transactional
 public class CategoryService {
+
+    public static final int CATEGORY_PER_PAGE = 5;
 
     @Autowired
     private CategoryRepository categoryRepository;
@@ -46,5 +52,10 @@ public class CategoryService {
 
     public Category save(Category category) {
         return categoryRepository.save(category);
+    }
+
+    public Page<Category> listByPage(int pageNumber) {
+        Pageable pageable = PageRequest.of(pageNumber - 1, CATEGORY_PER_PAGE);
+        return categoryRepository.findAll(pageable);
     }
 }
