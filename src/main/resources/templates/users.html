@@ -28,6 +28,7 @@
                 <div class="navbar-nav">
                     <a class="nav-item nav-link" th:href="@{/users}">Users</a>
                     <a class="nav-item nav-link" th:href="@{/categories}">Categories</a>
+                    <a class="nav-item nav-link" th:href="@{/brands}">Brands</a>
                     <a class="nav-item nav-link" th:href="@{/products}">Products</a>
                     <a class="nav-item nav-link" th:href="@{/orders}">Orders</a>
                     <a class="nav-item nav-link" th:href="@{/settings}">Settings</a>
@@ -91,7 +92,9 @@
                     [[${user.lastName}]]
                 </td>
                 <td>
-                    <span class="badge badge-primary rounded-pill d-inline">[[${user.roles}]]</span>
+                    <th:block th:each="role: ${user.roles}">
+                        <span class="badge badge-primary rounded-pill d-inline" th:text="${role.name}"></span>
+                    </th:block>
                 </td>
                 <td>
                     <a th:if="${user.status == true}" th:href="@{'/users/' + ${user.id} + '/status/false'}"

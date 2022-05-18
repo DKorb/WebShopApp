@@ -10,7 +10,6 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css" rel="stylesheet"/>
     <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 
 </head>
@@ -57,8 +56,73 @@
                 </div>
             </div>
         </nav>
-        <h1>WebShop Admin Panel</h1>
     </div>
+    <div class="alert alert-success" role="alert" th:if="${message != null}">
+        [[${message}]]
+    </div>
+    <div class="m-3">
+        <a th:href="@{/brands/new}" type="submit" class="btn btn-outline-primary" data-mdb-ripple-color="dark">
+            Create brand</a>
+    </div>
+    <div>
+        <table class="table align-middle mb-0 bg-white">
+            <thead class="bg-light">
+            <tr>
+                <th>ID</th>
+                <th>Logo</th>
+                <th>Brand Name</th>
+                <th>Categories</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="brand : ${brandList}">
+                <td>
+                    [[${brand.id}]]
+                </td>
+                <td>
+
+                </td>
+                <td>
+                    [[${brand.name}]]
+                </td>
+                <td>
+                    <th:block th:each="category: ${brand.categories}">
+                        <span class="badge badge-secondary" th:text="${category.name}"></span>
+                    </th:block>
+                </td>
+                <td>
+                    <a type="button" class="btn btn-link btn-sm btn-rounded"
+                       th:href="@{'/brands/edit/' + ${brand.id}}">
+                        Edit
+                    </a>
+                    <a type="button" class="btn btn-link btn-sm btn-rounded"
+                       th:href="@{'/brands/delete/' + ${brand.id}}">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!--    <div class="m-5">
+            <ul class="pagination justify-content-center">
+                <li th:class="${currentBrandPage > 1 ? 'page-item' : 'page-item disabled'}">
+                    <a class="page-link" th:href="@{'/brands/page/' + ${currentBrandPage - 1}}">Previous</a>
+                </li>
+
+                <li th:class="${currentBrandPage != i ? 'page-item': 'page-item active'}"
+                    th:each="i : ${#numbers.sequence(1, totalBrandPages)}">
+                    <a class="page-link" th:href="@{'/brands/page/' + ${i}}">[[${i}]]</a>
+                </li>
+
+                <li th:class="${currentCategoryPage < totalBrandPages ? 'page-item' : 'page-item disabled'}">
+                    <a class="page-link" th:href="@{'/brands/page/' + ${currentBrandPage + 1}}">Next</a>
+                </li>
+            </ul>
+        </div>-->
+
     <div class="text-center">
         <p>WebShop Control Panel - Copyright &copy; Dawid Korbecki</p>
     </div>
