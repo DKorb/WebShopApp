@@ -23,6 +23,7 @@ public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
+
     public List<Category> listAllCategories() {
         return (List<Category>) categoryRepository.findAll();
     }

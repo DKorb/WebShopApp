@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale = 1.0, minimal-scale = 1.0">
+
+    <title>[[${pageTitle}]]</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css" rel="stylesheet"/>
+    <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+</head>
+<body>
+<div class="container-fluid">
+    <div>
+        <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutAction">
+            <input th:type="submit"/>
+        </form>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" th:href="@{/}">WebShop App</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="topNavbar">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link" th:href="@{/users}">Users</a>
+                    <a class="nav-item nav-link" th:href="@{/categories}">Categories</a>
+                    <a class="nav-item nav-link" th:href="@{/brands}">Brands</a>
+                    <a class="nav-item nav-link" th:href="@{/products}">Products</a>
+                    <a class="nav-item nav-link" th:href="@{/orders}">Orders</a>
+                    <a class="nav-item nav-link" th:href="@{/settings}">Settings</a>
+                    <a class="nav-item nav-link" th:href="@{/dashboards}">Dashboards</a>
+                </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false"
+                               sec:authentication="principal.accountName">
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
+                                <li>
+                                    <a class="dropdown-item" id="logoutItem">Logout</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="text-center">
+        <h2 class="bold">[[${pageTitle}]]</h2>
+    </div>
+    <form th:action="@{/brands/save}" method="post" enctype="multipart/form-data"
+          style="max-width: 500px; margin: 0 auto" th:object="${brand}">
+        <input type="hidden" th:field="*{id}"/>
+        <div class="border border-5 rounded p-3">
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Name:</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control"
+                           th:field="*{name}" required minlength="6" maxlength="48"/>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Logo:</label>
+                <div class="col-sm-8">
+                    <input type="hidden" th:field="*{logo}"/>
+                    <input type="file" id="fileImage" name="fileImage" accept="image/png, image/jpeg"
+                           required class="mb-2"/>
+
+                    <div class="m-2">
+                        <img id="thumbnail" alt="Image preview" class="img-fluid" width="150"
+                             th:src="@{${brand.logoPath}}"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Select one or more categories:</label>
+                <div class="col-sm-8">
+                    <select class="form-control" th:field="*{categories}" multiple required
+                            style="resize: vertical; height: 200px">
+                        <th:block th:each="category : ${listCategories}">
+                            <option th:value="${category.id}">[[${category.name}]]</option>
+                        </th:block>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Chosen categories: </label>
+                <div class="col-sm-8">
+
+                </div>
+            </div>
+
+            <div class="text-center">
+                <div class="m-3">
+                    <input type="submit" value="CREATE" class="btn btn-primary"/>
+                    <input type="button" value="CANCEL" class="btn btn-warning" id="buttonCancel"/>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#buttonCancel').on("click", function () {
+            window.location = "[[@{/brands}]]";
+        })
+    })
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#logoutItem").on("click", function (e) {
+            e.preventDefault();
+            document.logoutAction.submit();
+        })
+    });
+</script>
+</body>
+</html>
