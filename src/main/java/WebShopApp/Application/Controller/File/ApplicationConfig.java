@@ -12,20 +12,15 @@ public class ApplicationConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        String categoryImagesDirName = "category-images";
-        Path categoryImagesDir = Paths.get(categoryImagesDirName);
+        imagesDirectory("category-images", registry);
+        imagesDirectory("brand-images", registry);
+    }
 
-        String categoryImagesPath = categoryImagesDir.toFile().getAbsolutePath();
-
-        registry.addResourceHandler("/" + categoryImagesDirName + "/**")
-                .addResourceLocations("file:/" + categoryImagesPath + "/");
-
-        String brandLogoDirName = "brand-images";
-        Path brandLogoDir = Paths.get(brandLogoDirName);
-
-        String brandLogoPath = brandLogoDir.toFile().getAbsolutePath();
-
-        registry.addResourceHandler("/" + brandLogoDirName + "/**")
-                .addResourceLocations("file:/" + brandLogoPath + "/");
+    private void imagesDirectory(String pathPattern, ResourceHandlerRegistry registry) {
+        Path path = Paths.get(pathPattern);
+        String absolutePath = path.toFile().getAbsolutePath();
+        String logicalPath = "/" + pathPattern + "/**";
+        registry.addResourceHandler(logicalPath)
+                .addResourceLocations("file:/" + absolutePath + "/");
     }
 }
