@@ -117,5 +117,28 @@
     </form>
 </div>
 <div th:replace="js_form_image :: scripts"></div>
+<script type="text/javascript">
+    moduleURL = "[[@{/brands}]]";
+
+    $(document).ready(function () {
+        dropdownCategories = $("#categories");
+        divChosenCategories = $("#chosenCategories");
+
+        dropdownCategories.change(function () {
+            divChosenCategories.empty();
+            showChosenCategories();
+        });
+    });
+
+    function showChosenCategories() {
+        dropdownCategories.children("option:selected").each(function () {
+            selectedCategory = $(this);
+            categoryId = selectedCategory.val();
+            categoryName = selectedCategory.text().replace(/:/g, "");
+
+            divChosenCategories.append("<span class='badge badge-secondary m-1'>" + categoryName + "</span>");
+        });
+    }
+</script>
 </body>
 </html>
