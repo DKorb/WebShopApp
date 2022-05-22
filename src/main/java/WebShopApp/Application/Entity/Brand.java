@@ -53,6 +53,6 @@ public class Brand {
     @Transient
     public String getLogoPath() {
         if (this.id == null) return "/images/image_thumbnail.png";
-        return "brand-images/" + this.id + "/" + this.logo;
+        return "/brand-images/" + this.id + "/" + this.logo;
     }
 }

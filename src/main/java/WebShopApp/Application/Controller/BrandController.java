@@ -3,6 +3,7 @@ package WebShopApp.Application.Controller;
 import WebShopApp.Application.Controller.File.FileUploadUtil;
 import WebShopApp.Application.Entity.Brand;
 import WebShopApp.Application.Entity.Category;
+import WebShopApp.Application.Exceptions.BrandNotFoundException;
 import WebShopApp.Application.Service.BrandService;
 import WebShopApp.Application.Service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -65,5 +67,26 @@ public class BrandController {
 
         redirectAttributes.addFlashAttribute("message", "The brand has been saved successfully");
         return "redirect:/brands";
+    }
+
+    @GetMapping("/brands/edit/{id}")
+    public String editBrand(@PathVariable(name = "id") Integer id,
+                            Model model,
+                            RedirectAttributes redirectAttributes) {
+        try {
+            Brand brand = brandService.get(id);
+            List<Brand> listBrands = brandService.listBrands();
+            List<Category> listCategories = categoryService.listAllCategories();
+
+            model.addAttribute("brand", brand);
+            model.addAttribute("listBrands", listBrands);
+            model.addAttribute("listCategories", listCategories);
+            model.addAttribute("pageTitle", "Edit Brand (ID: " + id + ")");
+
+            return "brands_form";
+        } catch (BrandNotFoundException ex) {
+            redirectAttributes.addFlashAttribute("message", ex.getMessage());
+            return "redirect:/brands";
+        }
     }
 }
