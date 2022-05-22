@@ -33,4 +33,14 @@ public class BrandService {
     public Brand save(Brand brand) {
         return brandRepository.save(brand);
     }
+
+    public void deleteBrand(Integer id) throws BrandNotFoundException {
+        Long countById = brandRepository.countBrandById(id);
+
+        if (countById == null || countById == 0) {
+            throw new BrandNotFoundException("Could not find any Brand with ID" + id);
+        }
+
+        brandRepository.deleteById(id);
+    }
 }
