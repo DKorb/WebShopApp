@@ -63,13 +63,6 @@
         <p>WebShop Control Panel - Copyright &copy; Dawid Korbecki</p>
     </div>
 </div>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#logoutItem").on("click", function (e) {
-            e.preventDefault();
-            document.logoutAction.submit();
-        })
-    });
-</script>
+<div th:replace="js_logout :: logout"></div>
 </body>
 </html>

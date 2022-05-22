@@ -84,7 +84,7 @@
                 <div class="col-sm-8">
                     <input type="hidden" th:field="*{image}"/>
                     <input type="file" id="fileImage" name="fileImage" accept="image/png, image/jpeg"
-                           th:required="${category.imagePath == null}" class="mb-2"/>
+                           required class="mb-2"/>
 
                     <div class="m-2">
                         <img id="thumbnail" alt="Image preview" class="img-fluid" width="150"
@@ -107,20 +107,6 @@
         </div>
     </form>
 </div>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#buttonCancel').on("click", function () {
-            window.location = "[[@{/categories}]]";
-        })
-    })
-</script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#logoutItem").on("click", function (e) {
-            e.preventDefault();
-            document.logoutAction.submit();
-        })
-    });
-</script>
+<div th:replace="js_form_image :: scripts"></div>
 </body>
 </html>

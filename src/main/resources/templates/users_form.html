@@ -120,20 +120,6 @@
         </div>
     </form>
 </div>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#buttonCancel').on("click", function () {
-            window.location = "[[@{/users}]]";
-        })
-    })
-</script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#logoutItem").on("click", function (e) {
-            e.preventDefault();
-            document.logoutAction.submit();
-        })
-    });
-</script>
+<div th:replace="js_form_image :: scripts"></div>
 </body>
 </html>
