@@ -15,48 +15,9 @@
 </head>
 <body>
 <div class="container-fluid">
-    <div>
-        <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutAction">
-            <input th:type="submit"/>
-        </form>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" th:href="@{/}">WebShop App</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="topNavbar">
-                <div class="navbar-nav">
-                    <a class="nav-item nav-link" th:href="@{/users}">Users</a>
-                    <a class="nav-item nav-link" th:href="@{/categories}">Categories</a>
-                    <a class="nav-item nav-link" th:href="@{/brands}">Brands</a>
-                    <a class="nav-item nav-link" th:href="@{/products}">Products</a>
-                    <a class="nav-item nav-link" th:href="@{/orders}">Orders</a>
-                    <a class="nav-item nav-link" th:href="@{/settings}">Settings</a>
-                    <a class="nav-item nav-link" th:href="@{/dashboards}">Dashboards</a>
-                </div>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
-                               data-bs-toggle="dropdown" aria-expanded="false"
-                               sec:authentication="principal.accountName">
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li>
-                                    <a class="dropdown-item" id="logoutItem">Logout</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </div>
+
+    <div th:replace="navigation_fragment :: navigation"></div>
+
     <div class="alert alert-success" role="alert" th:if="${message != null}">
         [[${message}]]
     </div>

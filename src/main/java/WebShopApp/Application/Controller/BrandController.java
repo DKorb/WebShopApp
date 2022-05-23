@@ -43,7 +43,7 @@ public class BrandController {
         model.addAttribute("brand", new Brand());
         model.addAttribute("pageTitle", "Create New Brand");
 
-        return "brands_form";
+        return "brands/brands_form";
     }
 
     @PostMapping("/brands/save")
@@ -81,7 +81,7 @@ public class BrandController {
             model.addAttribute("listCategories", listCategories);
             model.addAttribute("pageTitle", "Edit Brand (ID: " + id + ")");
 
-            return "brands_form";
+            return "brands/brands_form";
         } catch (BrandNotFoundException ex) {
             redirectAttributes.addFlashAttribute("message", ex.getMessage());
             return "redirect:/brands";
@@ -120,6 +120,6 @@ public class BrandController {
         model.addAttribute("totalBrandPages", page.getTotalPages());
         model.addAttribute("brandList", brandList);
 
-        return "brands";
+        return "brands/brands";
     }
 }

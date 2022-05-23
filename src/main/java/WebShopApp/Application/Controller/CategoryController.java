@@ -51,7 +51,7 @@ public class CategoryController {
         model.addAttribute("listCategoriesInForm", listCategoriesInForm);
         model.addAttribute("pageTitle", "Create New Category");
 
-        return "category_form";
+        return "categories/category_form";
     }
 
     @PostMapping("/categories/save")
@@ -89,7 +89,7 @@ public class CategoryController {
             model.addAttribute("listAllCategories", listAllCategories);
             model.addAttribute("pageTitle", "Edit Category (ID: " + id + ")");
 
-            return "category_form";
+            return "categories/category_form";
         } catch (CategoryNotFoundException ex) {
             redirectAttributes.addFlashAttribute("message", ex.getMessage());
             return "redirect:/categories";
@@ -138,7 +138,7 @@ public class CategoryController {
         model.addAttribute("totalCategoryPages", page.getTotalPages());
         model.addAttribute("categoryList", categoryList);
 
-        return "categories";
+        return "categories/categories";
     }
 
 }
