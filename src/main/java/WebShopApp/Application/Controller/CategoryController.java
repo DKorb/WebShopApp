@@ -2,10 +2,8 @@ package WebShopApp.Application.Controller;
 
 import WebShopApp.Application.Controller.File.FileUploadUtil;
 import WebShopApp.Application.Entity.Category;
-import WebShopApp.Application.Entity.User;
 import WebShopApp.Application.Exceptions.CategoryNotFoundException;
 import WebShopApp.Application.Service.CategoryService;
-import WebShopApp.Application.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -27,7 +25,11 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-/*    @GetMapping("/categories")
+    public CategoryController(CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
+
+    /*    @GetMapping("/categories")
     public String listAllCategories(Model model) {
         List<Category> categoryList = categoryService.listAllCategories();
         model.addAttribute("categoryList", categoryList);

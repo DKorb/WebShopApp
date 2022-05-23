@@ -106,7 +106,7 @@
         </table>
     </div>
 
-    <!--    <div class="m-5">
+        <div class="m-5">
             <ul class="pagination justify-content-center">
                 <li th:class="${currentBrandPage > 1 ? 'page-item' : 'page-item disabled'}">
                     <a class="page-link" th:href="@{'/brands/page/' + ${currentBrandPage - 1}}">Previous</a>
@@ -117,11 +117,11 @@
                     <a class="page-link" th:href="@{'/brands/page/' + ${i}}">[[${i}]]</a>
                 </li>
 
-                <li th:class="${currentCategoryPage < totalBrandPages ? 'page-item' : 'page-item disabled'}">
+                <li th:class="${currentBrandPage < totalBrandPages ? 'page-item' : 'page-item disabled'}">
                     <a class="page-link" th:href="@{'/brands/page/' + ${currentBrandPage + 1}}">Next</a>
                 </li>
             </ul>
-        </div>-->
+        </div>
 
     <div class="text-center">
         <p>WebShop Control Panel - Copyright &copy; Dawid Korbecki</p>

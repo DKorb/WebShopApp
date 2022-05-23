@@ -7,6 +7,7 @@ import WebShopApp.Application.Exceptions.BrandNotFoundException;
 import WebShopApp.Application.Service.BrandService;
 import WebShopApp.Application.Service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -30,11 +31,8 @@ public class BrandController {
     private CategoryService categoryService;
 
     @GetMapping("/brands")
-    public String listAllBrands(Model model) {
-        List<Brand> brandList = brandService.listBrands();
-        model.addAttribute("brandList", brandList);
-
-        return "brands";
+    public String listFirstPage(Model model) {
+        return listByPage(1, model);
     }
 
     @GetMapping("/brands/new")
@@ -103,5 +101,25 @@ public class BrandController {
             redirectAttributes.addFlashAttribute("message", ex.getMessage());
         }
         return "redirect:/brands";
+    }
+
+    @GetMapping("/brands/page/{pageNumber}")
+    public String listByPage(@PathVariable(name = "pageNumber") int pageNumber, Model model) {
+
+        Page<Brand> page = brandService.listByPage(pageNumber);
+        List<Brand> brandList = page.getContent();
+
+        long startCount = ((long) (pageNumber - 1) * BrandService.BRAND_PER_PAGE + 1);
+        long endCount = startCount + BrandService.BRAND_PER_PAGE - 1;
+
+        if (endCount > page.getTotalElements()) {
+            page.getTotalElements();
+        }
+
+        model.addAttribute("currentBrandPage", pageNumber);
+        model.addAttribute("totalBrandPages", page.getTotalPages());
+        model.addAttribute("brandList", brandList);
+
+        return "brands";
     }
 }

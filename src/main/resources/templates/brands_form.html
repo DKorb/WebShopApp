@@ -68,7 +68,7 @@
                 <label class="col-sm-4 col-form-label">Name:</label>
                 <div class="col-sm-8">
                     <input type="text" class="form-control"
-                           th:field="*{name}" required minlength="6" maxlength="48"/>
+                           th:field="*{name}" required minlength="2" maxlength="48"/>
                 </div>
             </div>
 
@@ -76,8 +76,7 @@
                 <label class="col-sm-4 col-form-label">Logo:</label>
                 <div class="col-sm-8">
                     <input type="hidden" th:field="*{logo}"/>
-                    <input type="file" id="fileImage" name="fileImage" accept="image/png, image/jpeg"
-                           required class="mb-2"/>
+                    <input type="file" id="fileImage" name="fileImage" accept="image/png, image/jpeg" class="mb-2"/>
 
                     <div class="m-2">
                         <img id="thumbnail" alt="Image preview" class="img-fluid" width="150"
