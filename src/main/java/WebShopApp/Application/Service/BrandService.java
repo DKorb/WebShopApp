@@ -24,7 +24,7 @@ public class BrandService {
     @Autowired
     private BrandRepository brandRepository;
 
-    public List<Brand> listBrands() {
+    public List<Brand> listAllBrands() {
         return (List<Brand>) brandRepository.findAll();
     }
 

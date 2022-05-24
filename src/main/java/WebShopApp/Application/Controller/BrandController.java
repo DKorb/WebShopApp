@@ -73,7 +73,7 @@ public class BrandController {
                             RedirectAttributes redirectAttributes) {
         try {
             Brand brand = brandService.get(id);
-            List<Brand> listBrands = brandService.listBrands();
+            List<Brand> listBrands = brandService.listAllBrands();
             List<Category> listCategories = categoryService.listAllCategories();
 
             model.addAttribute("brand", brand);
