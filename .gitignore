@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Directory files ###
+/brand-images/
+/category-images/
+/project_data/
