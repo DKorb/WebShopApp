@@ -55,6 +55,32 @@
 
     </form>
 </div>
+<script type="text/javascript">
+    moduleURL = "[[@{/products}]]"
+    brandModuleURL = "[[@{/brands}]]"
+
+    dropdownBrands = $("#brand");
+    dropdownCategories = $("#category");
+
+    $(document).ready(function () {
+        dropdownBrands.change(function () {
+            dropdownCategories.empty();
+            getCategories();
+        })
+        getCategories();
+    });
+
+    function getCategories() {
+        brandId = dropdownBrands.val();
+        url = brandModuleURL + "/" + brandId + "/categories";
+
+        $.get(url, function (responseJson) {
+            $.each(responseJson, function (index, category) {
+                $("<option>").val(category.id).text(category.name).appendTo(dropdownCategories);
+            });
+        });
+    }
+</script>
 <div th:replace="js_logout :: logout"></div>
 </body>
 </html>
