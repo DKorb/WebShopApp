@@ -13,7 +13,7 @@
     <div class="text-center">
         <h2 class="bold">[[${pageTitle}]]</h2>
     </div>
-    <form th:action="@{/product/save}" method="post" enctype="multipart/form-data"
+    <form th:action="@{/products/save}" method="post" enctype="multipart/form-data"
           th:object="${product}">
         <input type="hidden" th:field="*{id}"/>
 
@@ -40,7 +40,8 @@
                 <div th:replace="products/product_overview :: content"></div>
             </div>
             <div class="tab-pane fade" id="nav-description" role="tabpanel"
-                 aria-labelledby="nav-profile-tab">Description
+                 aria-labelledby="nav-profile-tab">
+                <div th:replace="products/product_description :: content"></div>
             </div>
             <div class="tab-pane fade" id="nav-images" role="tabpanel"
                  aria-labelledby="nav-profile-tab">Images
@@ -67,6 +68,10 @@
     dropdownCategories = $("#category");
 
     $(document).ready(function () {
+
+        $("#shortDescription").richText();
+        $("#fullDescription").richText();
+
         dropdownBrands.change(function () {
             dropdownCategories.empty();
             getCategories();
