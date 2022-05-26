@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.List;
+import javax.transaction.Transactional;
 import java.util.Date;
+import java.util.List;
 
 @Service
+@Transactional
 public class ProductService {
 
     @Autowired
@@ -36,4 +38,9 @@ public class ProductService {
 
         return productRepository.save(product);
     }
+
+    public void updateProductStatus(Integer id, boolean status) {
+        productRepository.updateStatus(id, status);
+    }
+
 }
