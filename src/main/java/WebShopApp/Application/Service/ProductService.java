@@ -1,6 +1,7 @@
 package WebShopApp.Application.Service;
 
 import WebShopApp.Application.Entity.Product;
+import WebShopApp.Application.Exceptions.ProductNotFoundException;
 import WebShopApp.Application.Repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,16 @@ public class ProductService {
         product.setUpdatedTime(new Date());
 
         return productRepository.save(product);
+    }
+
+    public void deleteProduct(Integer id) throws ProductNotFoundException {
+        Long countById = productRepository.countById(id);
+
+        if (countById == null || countById == 0) {
+            throw new ProductNotFoundException("Could not find aby product with ID " + id);
+        }
+
+        productRepository.deleteById(id);
     }
 
     public void updateProductStatus(Integer id, boolean status) {

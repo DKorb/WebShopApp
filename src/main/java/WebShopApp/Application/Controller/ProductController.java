@@ -2,6 +2,7 @@ package WebShopApp.Application.Controller;
 
 import WebShopApp.Application.Entity.Brand;
 import WebShopApp.Application.Entity.Product;
+import WebShopApp.Application.Exceptions.ProductNotFoundException;
 import WebShopApp.Application.Service.BrandService;
 import WebShopApp.Application.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +54,19 @@ public class ProductController {
         redirectAttributes.addFlashAttribute("message",
                 "The product has been saved successfully.");
 
+        return "redirect:/products";
+    }
+
+    @GetMapping("/products/delete/{id}")
+    public String deleteProduct(@PathVariable(name = "id") Integer id,
+                                RedirectAttributes redirectAttributes) {
+        try {
+            productService.deleteProduct(id);
+            redirectAttributes.addFlashAttribute("message", "The product ID " + id
+                    + " has been deleted successfully");
+        } catch (ProductNotFoundException ex) {
+            redirectAttributes.addFlashAttribute("message", ex.getMessage());
+        }
         return "redirect:/products";
     }
 
