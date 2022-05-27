@@ -10,55 +10,57 @@
 
     <div th:replace="fragments :: navigation"></div>
 
-    <div class="text-center">
+<!--    <div class="text-center">
         <h2 class="bold">[[${pageTitle}]]</h2>
-    </div>
+    </div>-->
     <form th:action="@{/products/save}" method="post" enctype="multipart/form-data"
-          th:object="${product}">
+          th:object="${product}" style="max-width: 1100px; margin: 0 auto">
         <input type="hidden" th:field="*{id}"/>
+        <div class="border border-5 rounded p-3 m-5">
 
-        <nav>
-            <div class="nav nav-tabs mb-3" id="myTab" role="tablist">
-                <button class="nav-link active" id="overview" data-bs-toggle="tab" data-bs-target="#nav-overview"
-                        type="button" role="tab" aria-controls="nav-home" aria-selected="true">Overview
-                </button>
-                <button class="nav-link" id="description" data-bs-toggle="tab" data-bs-target="#nav-description"
-                        type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Description
-                </button>
-                <button class="nav-link" id="images" data-bs-toggle="tab" data-bs-target="#nav-images"
-                        type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Images
-                </button>
-                <button class="nav-link" id="details" data-bs-toggle="tab" data-bs-target="#nav-details"
-                        type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Details
-                </button>
-            </div>
-        </nav>
+            <nav class="nav justify-content-center">
+                <div class="nav nav-tabs mb-3" id="myTab" role="tablist">
+                    <button class="nav-link active" id="overview" data-bs-toggle="tab" data-bs-target="#nav-overview"
+                            type="button" role="tab" aria-controls="nav-home" aria-selected="true">Overview
+                    </button>
+                    <button class="nav-link" id="description" data-bs-toggle="tab" data-bs-target="#nav-description"
+                            type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Description
+                    </button>
+                    <button class="nav-link" id="images" data-bs-toggle="tab" data-bs-target="#nav-images"
+                            type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Images
+                    </button>
+                    <button class="nav-link" id="details" data-bs-toggle="tab" data-bs-target="#nav-details"
+                            type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Details
+                    </button>
+                </div>
+            </nav>
 
-        <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active p-3" id="nav-overview" role="tabpanel"
-                 aria-labelledby="overview">
-                <div th:replace="products/product_overview :: content"></div>
-            </div>
-            <div class="tab-pane fade" id="nav-description" role="tabpanel"
-                 aria-labelledby="nav-profile-tab">
-                <div th:replace="products/product_description :: content"></div>
-            </div>
-            <div class="tab-pane fade" id="nav-images" role="tabpanel"
-                 aria-labelledby="nav-profile-tab">
-                <div th:replace="products/product_images :: content"></div>
-            </div>
-            <div class="tab-pane fade" id="nav-details" role="tabpanel"
-                 aria-labelledby="nav-contact-tab">Details
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active p-3" id="nav-overview" role="tabpanel"
+                     aria-labelledby="overview">
+                    <div th:replace="products/product_overview :: content"></div>
+                </div>
+                <div class="tab-pane fade" id="nav-description" role="tabpanel"
+                     aria-labelledby="nav-profile-tab">
+                    <div th:replace="products/product_description :: content"></div>
+                </div>
+                <div class="tab-pane fade" id="nav-images" role="tabpanel"
+                     aria-labelledby="nav-profile-tab">
+                    <div th:replace="products/product_images :: content"></div>
+                </div>
+                <div class="tab-pane fade" id="nav-details" role="tabpanel"
+                     aria-labelledby="nav-contact-tab">Details
+                </div>
+
+                <div class="text-center">
+                    <div class="m-3">
+                        <input type="submit" value="SAVE" class="btn btn-primary"/>
+                        <input type="button" value="CANCEL" class="btn btn-warning" id="buttonCancel"/>
+                    </div>
+                </div>
+
             </div>
         </div>
-
-        <div class="text-center">
-            <div class="m-3">
-                <input type="submit" value="SAVE" class="btn btn-primary"/>
-                <input type="button" value="CANCEL" class="btn btn-warning" id="buttonCancel"/>
-            </div>
-        </div>
-
     </form>
 </div>
 <script type="text/javascript">

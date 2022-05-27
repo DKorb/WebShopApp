@@ -2,11 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <body>
 <div th:fragment="content" th:remove="tag">
-    <div class="m-2">
-        <label>Short Description:</label>
-        <textarea class="form-control" th:field="*{shortDescription}" rows="5" required></textarea>
-        <label>Full Description:</label>
-        <textarea class="form-control" th:field="*{fullDescription}" rows="5" required></textarea>
+    <div class="text-center m-2">
+        <label>
+            Short Description:
+            <textarea class="form-control" th:field="*{shortDescription}" rows="5" required></textarea>
+        </label>
+        <label>
+            Full Description:
+            <textarea class="form-control" th:field="*{fullDescription}" rows="5" required></textarea>
+        </label>
     </div>
 </div>
 </body>
