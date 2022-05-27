@@ -14,6 +14,7 @@ public class ApplicationConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         imagesDirectory("category-images", registry);
         imagesDirectory("brand-images", registry);
+        imagesDirectory("product-images", registry);
     }
 
     private void imagesDirectory(String pathPattern, ResourceHandlerRegistry registry) {
