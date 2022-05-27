@@ -44,7 +44,8 @@
                 <div th:replace="products/product_description :: content"></div>
             </div>
             <div class="tab-pane fade" id="nav-images" role="tabpanel"
-                 aria-labelledby="nav-profile-tab">Images
+                 aria-labelledby="nav-profile-tab">
+                <div th:replace="products/product_images :: content"></div>
             </div>
             <div class="tab-pane fade" id="nav-details" role="tabpanel"
                  aria-labelledby="nav-contact-tab">Details
@@ -61,35 +62,13 @@
     </form>
 </div>
 <script type="text/javascript">
+
     moduleURL = "[[@{/products}]]"
     brandModuleURL = "[[@{/brands}]]"
 
-    dropdownBrands = $("#brand");
-    dropdownCategories = $("#category");
-
-    $(document).ready(function () {
-
-        $("#shortDescription").richText();
-        $("#fullDescription").richText();
-
-        dropdownBrands.change(function () {
-            dropdownCategories.empty();
-            getCategories();
-        })
-        getCategories();
-    });
-
-    function getCategories() {
-        brandId = dropdownBrands.val();
-        url = brandModuleURL + "/" + brandId + "/categories";
-
-        $.get(url, function (responseJson) {
-            $.each(responseJson, function (index, category) {
-                $("<option>").val(category.id).text(category.name).appendTo(dropdownCategories);
-            });
-        });
-    }
 </script>
-<div th:replace="js_logout :: logout"></div>
+<script th:src="@{/javascript/product_form.js}"></script>
+<script th:src="@{/javascript/logout.js}"></script>
+<div th:replace="fragments :: scripts"></div>
 </body>
 </html>
