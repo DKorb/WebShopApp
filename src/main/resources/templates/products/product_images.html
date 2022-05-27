@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<body>
+<div th:fragment="content" th:remove="tag">
+    <div class="row" id="productImages">
+        <div>
+            <div class="text-center">
+                <div>
+                    <label>Product image:</label>
+                </div>
+                <div class="m-2">
+                    <img id="thumbnail" class="img-fluid"
+                         th:src="@{${product.imagePath}}" style="width: 150px"/>
+                </div>
+                <div>
+                    <input type="file" id="fileImage" name="fileImage"
+                           required accept="image/png, image/jpeg"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
