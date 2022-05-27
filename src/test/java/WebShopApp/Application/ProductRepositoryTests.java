@@ -51,7 +51,7 @@ public class ProductRepositoryTests {
         product.setPrice(2698);
         product.setCreatedTime(new Date());
         product.setUpdatedTime(new Date());
-        product.setMainImage("main_image.png");
+        product.setImage("main_image.png");
 
         Product testProduct = productRepository.save(product);
 
@@ -71,17 +71,5 @@ public class ProductRepositoryTests {
         Product foundProduct = productRepository.findById(productID).get();
         System.out.println(foundProduct);
         assertThat(foundProduct).isNotNull();
-    }
-
-    @Test
-    public void testSaveProductWithAdditionalImages() {
-        Product product = productRepository.findById(1).get();
-        product.addExtraImage("extra_image_1.png");
-        product.addExtraImage("extra_image_2.png");
-        product.addExtraImage("extra_image_3.png");
-
-        Product newProduct = productRepository.save(product);
-
-        assertThat(newProduct.getImages().size()).isEqualTo(3);
     }
 }
