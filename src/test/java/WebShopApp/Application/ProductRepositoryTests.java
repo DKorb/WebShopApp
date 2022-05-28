@@ -72,4 +72,17 @@ public class ProductRepositoryTests {
         System.out.println(foundProduct);
         assertThat(foundProduct).isNotNull();
     }
+
+    @Test
+    public void testSaveProductWithDetails() {
+        Product product = productRepository.findById(1).get();
+
+        product.addDetails("SIM card", "Dual SIM");
+        product.addDetails("Memory storage", "128 GB");
+        product.addDetails("Battery power", "16");
+        product.addDetails("Cellular Technology", "LTE, UMTS");
+
+        Product newProduct = productRepository.save(product);
+        assertThat(newProduct.getDetails()).isNotEmpty();
+    }
 }
