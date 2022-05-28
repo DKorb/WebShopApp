@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -52,6 +53,13 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "brand_id")
     private Brand brand;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<ProductDetail> details;
+
+    public void addDetails(String name, String value) {
+        this.details.add(new ProductDetail(name, value, this));
+    }
 
     @Override
     public String toString() {
