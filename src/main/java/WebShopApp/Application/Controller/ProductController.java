@@ -54,27 +54,53 @@ public class ProductController {
     }
 
     @PostMapping("/products/save")
-    public String saveProduct(Product product, @RequestParam("fileImage") MultipartFile multipartFile,
+    public String saveProduct(Product product,
+                              @RequestParam("fileImage") MultipartFile multipartFile,
+                              @RequestParam(name = "detailNames", required = false) String[] detailNames,
+                              @RequestParam(name = "detailValues", required = false) String[] detailValues,
                               RedirectAttributes redirectAttributes) throws IOException {
 
-        if (!multipartFile.isEmpty()) {
-            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-            product.setImage(fileName);
+        setImageName(multipartFile, product);
+        setProductDetails(detailNames, detailValues, product);
 
-            Product savedProduct = productService.save(product);
-            String uploadDir = "product-images/" + savedProduct.getId();
+        Product savedProduct = productService.save(product);
 
-            FileUploadUtil.cleanDirectory(uploadDir);
-            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-        } else {
-            productService.save(product);
-        }
+        saveUploadedImage(multipartFile, savedProduct);
 
-        productService.save(product);
         redirectAttributes.addFlashAttribute("message",
                 "The product has been saved successfully.");
 
         return "redirect:/products";
+    }
+
+    private void setProductDetails(String[] detailNames, String[] detailValues, Product product) {
+        if (detailNames == null || detailNames.length == 0) return;
+
+        for (int count = 0; count < detailNames.length; count++) {
+            String name = detailNames[count];
+            String value = detailValues[count];
+
+            if (!name.isEmpty() && !value.isEmpty()) {
+                product.addDetails(name, value);
+            }
+        }
+    }
+
+    private void setImageName(MultipartFile multipartFile, Product product) {
+        if (!multipartFile.isEmpty()) {
+            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+            product.setImage(fileName);
+        }
+    }
+
+    private void saveUploadedImage(MultipartFile multipartFile, Product savedProduct) throws IOException {
+        if (!multipartFile.isEmpty()) {
+            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+            String uploadDir = "product-images/" + savedProduct.getId();
+
+            FileUploadUtil.cleanDirectory(uploadDir);
+            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+        }
     }
 
     @GetMapping("/products/delete/{id}")
