@@ -10,7 +10,7 @@ function addNextDetailSection() {
         </label>
         <label class="m-3">
             Value:
-            <input type="text" class="form-control" name="detailNames" maxlength="64"/>
+            <input type="text" class="form-control" name="detailValues" maxlength="64"/>
         </label>
     </div>
     `;
