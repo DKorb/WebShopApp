@@ -103,6 +103,29 @@ public class ProductController {
         }
     }
 
+    @GetMapping("/products/edit/{id}")
+    public String editProduct(@PathVariable(name = "id") Integer id,
+                              Model model,
+                              RedirectAttributes redirectAttributes) {
+        try {
+            Product product = productService.getProduct(id);
+
+            List<Product> listAllProducts = productService.listAllProducts();
+            List<Brand> listBrands = brandService.listAllBrands();
+
+            model.addAttribute("product", product);
+            model.addAttribute("listBrands", listBrands);
+            model.addAttribute("listAllProducts", listAllProducts);
+            model.addAttribute("pageTitle", "Edit Product (ID: " + id + ")");
+
+
+            return "products/product_form";
+        } catch (ProductNotFoundException ex) {
+            redirectAttributes.addFlashAttribute("message", ex.getMessage());
+            return "redirect:/products";
+        }
+    }
+
     @GetMapping("/products/delete/{id}")
     public String deleteProduct(@PathVariable(name = "id") Integer id,
                                 RedirectAttributes redirectAttributes) {
