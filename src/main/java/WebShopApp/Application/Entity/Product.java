@@ -24,7 +24,7 @@ public class Product {
     @Column(unique = true, length = 64, nullable = false)
     private String alias;
 
-    @Column(name = "short_description", length = 512, nullable = false)
+    @Column(name = "short_description", length = 2048, nullable = false)
     private String shortDescription;
 
     @Column(name = "full_description", length = 4096, nullable = false)

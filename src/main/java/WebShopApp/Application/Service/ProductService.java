@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @Transactional
@@ -52,6 +53,14 @@ public class ProductService {
 
     public void updateProductStatus(Integer id, boolean status) {
         productRepository.updateStatus(id, status);
+    }
+
+    public Product getProduct(Integer id) throws ProductNotFoundException {
+        try {
+            return productRepository.findById(id).get();
+        } catch (NoSuchElementException ex) {
+            throw new ProductNotFoundException("Could not find any product with ID " + id);
+        }
     }
 
 }
