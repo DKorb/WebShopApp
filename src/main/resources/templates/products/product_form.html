@@ -10,9 +10,9 @@
 
     <div th:replace="fragments :: navigation"></div>
 
-<!--    <div class="text-center">
+    <div class="text-center">
         <h2 class="bold">[[${pageTitle}]]</h2>
-    </div>-->
+    </div>
     <form th:action="@{/products/save}" method="post" enctype="multipart/form-data"
           th:object="${product}" style="max-width: 1100px; margin: 0 auto">
         <input type="hidden" th:field="*{id}"/>
