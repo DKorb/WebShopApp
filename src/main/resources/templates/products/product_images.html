@@ -8,13 +8,12 @@
                 <div>
                     <label>Product image:</label>
                 </div>
+                <input type="hidden" th:field="*{image}"/>
+                <input type="file" id="fileImage" name="fileImage" accept="image/png, image/jpeg" class="mb-2"/>
+
                 <div class="m-2">
-                    <img id="thumbnail" class="img-fluid"
-                         th:src="@{${product.imagePath}}" style="width: 150px"/>
-                </div>
-                <div>
-                    <input type="file" id="fileImage" name="fileImage"
-                           required accept="image/png, image/jpeg"/>
+                    <img id="thumbnail" alt="Image preview" class="img-fluid" width="150"
+                         th:src="@{${product.ImagePath}}"/>
                 </div>
             </div>
         </div>
