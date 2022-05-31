@@ -55,11 +55,15 @@ public class Product {
     @JoinColumn(name = "brand_id")
     private Brand brand;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductDetail> details = new ArrayList<>();
 
     public void addDetails(String name, String value) {
         this.details.add(new ProductDetail(name, value, this));
+    }
+
+    public void addDetails(Integer id, String name, String value) {
+        this.details.add(new ProductDetail(id, name, value, this));
     }
 
     @Override

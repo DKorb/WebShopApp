@@ -58,10 +58,11 @@ public class ProductController {
                               @RequestParam("fileImage") MultipartFile multipartFile,
                               @RequestParam(name = "detailNames", required = false) String[] detailNames,
                               @RequestParam(name = "detailValues", required = false) String[] detailValues,
+                              @RequestParam(name = "detailIDs", required = false) String[] detailIDs,
                               RedirectAttributes redirectAttributes) throws IOException {
 
         setImageName(multipartFile, product);
-        setProductDetails(detailNames, detailValues, product);
+        setProductDetails(detailNames, detailValues, detailIDs, product);
 
         Product savedProduct = productService.save(product);
 
@@ -73,14 +74,20 @@ public class ProductController {
         return "redirect:/products";
     }
 
-    private void setProductDetails(String[] detailNames, String[] detailValues, Product product) {
+    private void setProductDetails(String[] detailNames,
+                                   String[] detailValues,
+                                   String[] detailIDs,
+                                   Product product) {
         if (detailNames == null || detailNames.length == 0) return;
 
         for (int count = 0; count < detailNames.length; count++) {
             String name = detailNames[count];
             String value = detailValues[count];
+            Integer id = Integer.parseInt(detailIDs[count]);
 
-            if (!name.isEmpty() && !value.isEmpty()) {
+            if (id != 0) {
+                product.addDetails(id, name, value);
+            } else if (!name.isEmpty() && !value.isEmpty()) {
                 product.addDetails(name, value);
             }
         }
