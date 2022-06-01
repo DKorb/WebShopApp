@@ -3,7 +3,6 @@ dropdownCategories = $("#category");
 
 $(document).ready(function () {
 
-    $("#shortDescription").richText();
     $("#fullDescription").richText();
 
     dropdownBrands.change(function () {

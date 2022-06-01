@@ -24,9 +24,6 @@ public class Product {
     @Column(unique = true, length = 64, nullable = false)
     private String alias;
 
-    @Column(name = "short_description", length = 2048, nullable = false)
-    private String shortDescription;
-
     @Column(name = "full_description", length = 4096, nullable = false)
     private String fullDescription;
 
@@ -41,7 +38,6 @@ public class Product {
     @Column(name = "in_stock")
     private boolean inStock;
 
-    private float cost;
     private float price;
 
     @Column(length = 128, nullable = false)

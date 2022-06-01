@@ -35,16 +35,7 @@ public class ProductRepositoryTests {
         Product product = new Product();
         product.setName("Sony Alpha 7 IV");
         product.setAlias("sony alpha 7 iv");
-        product.setShortDescription("test short description, test short description, " +
-                "test short description, test short description, test short description," +
-                "test short description, test short description, test short description,");
-
-        product.setFullDescription("test full description, test full description," +
-                "test full description, test full description, test full description, " +
-                "test full description, test full description, test full description, " +
-                "test full description, test full description, test full description, " +
-                "test full description, test full description, test full description, " +
-                "test full description, test full description, test full description, ");
+        product.setFullDescription("test description");
 
         product.setBrand(brand);
         product.setCategory(category);
