@@ -4,6 +4,9 @@ import WebShopApp.Application.Entity.Product;
 import WebShopApp.Application.Exceptions.ProductNotFoundException;
 import WebShopApp.Application.Repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -15,6 +18,8 @@ import java.util.NoSuchElementException;
 @Service
 @Transactional
 public class ProductService {
+
+    public static final int PRODUCT_PER_PAGE = 5;
 
     @Autowired
     private ProductRepository productRepository;
@@ -63,4 +68,8 @@ public class ProductService {
         }
     }
 
+    public Page<Product> listByPage(int pageNumber) {
+        Pageable pageable = PageRequest.of(pageNumber - 1, PRODUCT_PER_PAGE);
+        return productRepository.findAll(pageable);
+    }
 }

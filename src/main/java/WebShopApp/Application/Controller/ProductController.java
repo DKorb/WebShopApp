@@ -7,6 +7,7 @@ import WebShopApp.Application.Exceptions.ProductNotFoundException;
 import WebShopApp.Application.Service.BrandService;
 import WebShopApp.Application.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -29,13 +30,18 @@ public class ProductController {
     @Autowired
     private BrandService brandService;
 
-    @GetMapping("/products")
+/*    @GetMapping("/products")
     public String listAllProducts(Model model) {
         List<Product> productList = productService.listAllProducts();
 
         model.addAttribute("productList", productList);
 
         return "products/products";
+    }*/
+
+    @GetMapping("/products")
+    public String listFirstPage(Model model) {
+        return listByPage(1, model);
     }
 
     @GetMapping("/products/new")
@@ -156,5 +162,25 @@ public class ProductController {
         redirectAttributes.addFlashAttribute("message", "The product ID " + id +
                 " has been " + message);
         return "redirect:/products";
+    }
+
+    @GetMapping("/products/page/{pageNumber}")
+    public String listByPage(@PathVariable(name = "pageNumber") int pageNumber, Model model) {
+
+        Page<Product> page = productService.listByPage(pageNumber);
+        List<Product> productList = page.getContent();
+
+        long startCount = ((long) (pageNumber - 1) * ProductService.PRODUCT_PER_PAGE + 1);
+        long endCount = startCount + ProductService.PRODUCT_PER_PAGE - 1;
+
+        if (endCount > page.getTotalElements()) {
+            page.getTotalElements();
+        }
+
+        model.addAttribute("currentProductPage", pageNumber);
+        model.addAttribute("totalProductPages", page.getTotalPages());
+        model.addAttribute("productList", productList);
+
+        return "products/products";
     }
 }
