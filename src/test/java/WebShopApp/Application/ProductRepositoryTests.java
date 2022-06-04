@@ -1,9 +1,9 @@
 package WebShopApp.Application;
 
-import WebShopApp.Application.Entity.Brand;
-import WebShopApp.Application.Entity.Category;
-import WebShopApp.Application.Entity.Product;
-import WebShopApp.Application.Repository.ProductRepository;
+import WebShopApp.Application.entity.brand.Brand;
+import WebShopApp.Application.entity.category.Category;
+import WebShopApp.Application.entity.product.Product;
+import WebShopApp.Application.repository.ProductRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;

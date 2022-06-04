@@ -1,7 +1,7 @@
 package WebShopApp.Application;
 
-import WebShopApp.Application.Entity.Role;
-import WebShopApp.Application.Repository.RoleRepository;
+import WebShopApp.Application.entity.role.Role;
+import WebShopApp.Application.repository.RoleRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
