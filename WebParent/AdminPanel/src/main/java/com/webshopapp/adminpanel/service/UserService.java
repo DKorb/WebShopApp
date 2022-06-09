@@ -1,8 +1,8 @@
 package com.webshopapp.adminpanel.service;
 
 
-import com.webshopapp.adminpanel.entity.role.Role;
-import com.webshopapp.adminpanel.entity.user.User;
+import com.webshopapp.common.entity.role.Role;
+import com.webshopapp.common.entity.user.User;
 import com.webshopapp.adminpanel.exceptions.UserNotFoundException;
 import com.webshopapp.adminpanel.repository.RoleRepository;
 import com.webshopapp.adminpanel.repository.UserRepository;

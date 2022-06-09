@@ -1,7 +1,7 @@
 package com.webshopapp.adminpanel.repository;
 
 
-import com.webshopapp.adminpanel.entity.category.Category;
+import com.webshopapp.common.entity.category.Category;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;

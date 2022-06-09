@@ -1,7 +1,7 @@
 package com.webshopapp.adminpanel.repository;
 
 
-import com.webshopapp.adminpanel.entity.brand.Brand;
+import com.webshopapp.common.entity.brand.Brand;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;

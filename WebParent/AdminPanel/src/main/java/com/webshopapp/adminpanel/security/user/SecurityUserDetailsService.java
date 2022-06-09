@@ -1,7 +1,7 @@
 package com.webshopapp.adminpanel.security.user;
 
 
-import com.webshopapp.adminpanel.entity.user.User;
+import com.webshopapp.common.entity.user.User;
 import com.webshopapp.adminpanel.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

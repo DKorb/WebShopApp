@@ -1,7 +1,7 @@
 package com.webshopapp.adminpanel.service;
 
 
-import com.webshopapp.adminpanel.entity.brand.Brand;
+import com.webshopapp.common.entity.brand.Brand;
 import com.webshopapp.adminpanel.exceptions.BrandNotFoundException;
 import com.webshopapp.adminpanel.repository.BrandRepository;
 import org.springframework.beans.factory.annotation.Autowired;

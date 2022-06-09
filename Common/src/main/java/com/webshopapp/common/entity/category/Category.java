@@ -1,4 +1,4 @@
-package com.webshopapp.adminpanel.entity.category;
+package com.webshopapp.common.entity.category;
 
 import lombok.Getter;
 import lombok.Setter;

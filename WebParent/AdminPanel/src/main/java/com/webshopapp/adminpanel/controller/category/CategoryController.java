@@ -2,7 +2,7 @@ package com.webshopapp.adminpanel.controller.category;
 
 
 import com.webshopapp.adminpanel.controller.file.FileUploadUtil;
-import com.webshopapp.adminpanel.entity.category.Category;
+import com.webshopapp.common.entity.category.Category;
 import com.webshopapp.adminpanel.exceptions.CategoryNotFoundException;
 import com.webshopapp.adminpanel.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;

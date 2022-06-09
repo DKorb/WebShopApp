@@ -1,8 +1,8 @@
 package com.webshopapp.adminpanel.security.user;
 
 
-import com.webshopapp.adminpanel.entity.role.Role;
-import com.webshopapp.adminpanel.entity.user.User;
+import com.webshopapp.common.entity.role.Role;
+import com.webshopapp.common.entity.user.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

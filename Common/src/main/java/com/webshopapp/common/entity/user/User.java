@@ -1,7 +1,7 @@
-package com.webshopapp.adminpanel.entity.user;
+package com.webshopapp.common.entity.user;
 
 
-import com.webshopapp.adminpanel.entity.role.Role;
+import com.webshopapp.common.entity.role.Role;
 import lombok.Getter;
 import lombok.Setter;
 

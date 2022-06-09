@@ -1,8 +1,8 @@
 package com.webshopapp.adminpanel;
 
 
-import com.webshopapp.adminpanel.entity.role.Role;
-import com.webshopapp.adminpanel.entity.user.User;
+import com.webshopapp.common.entity.role.Role;
+import com.webshopapp.common.entity.user.User;
 import com.webshopapp.adminpanel.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

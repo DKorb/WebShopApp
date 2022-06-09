@@ -1,7 +1,7 @@
 package com.webshopapp.adminpanel.service;
 
 
-import com.webshopapp.adminpanel.entity.product.Product;
+import com.webshopapp.common.entity.product.Product;
 import com.webshopapp.adminpanel.exceptions.ProductNotFoundException;
 import com.webshopapp.adminpanel.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,8 +2,8 @@ package com.webshopapp.adminpanel.controller.product;
 
 
 import com.webshopapp.adminpanel.controller.file.FileUploadUtil;
-import com.webshopapp.adminpanel.entity.brand.Brand;
-import com.webshopapp.adminpanel.entity.product.Product;
+import com.webshopapp.common.entity.brand.Brand;
+import com.webshopapp.common.entity.product.Product;
 import com.webshopapp.adminpanel.exceptions.ProductNotFoundException;
 import com.webshopapp.adminpanel.service.BrandService;
 import com.webshopapp.adminpanel.service.ProductService;

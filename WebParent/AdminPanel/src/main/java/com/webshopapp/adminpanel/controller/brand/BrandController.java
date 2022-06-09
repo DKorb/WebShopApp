@@ -1,8 +1,8 @@
 package com.webshopapp.adminpanel.controller.brand;
 
 import com.webshopapp.adminpanel.controller.file.FileUploadUtil;
-import com.webshopapp.adminpanel.entity.brand.Brand;
-import com.webshopapp.adminpanel.entity.category.Category;
+import com.webshopapp.common.entity.brand.Brand;
+import com.webshopapp.common.entity.category.Category;
 import com.webshopapp.adminpanel.exceptions.BrandNotFoundException;
 import com.webshopapp.adminpanel.service.BrandService;
 import com.webshopapp.adminpanel.service.CategoryService;

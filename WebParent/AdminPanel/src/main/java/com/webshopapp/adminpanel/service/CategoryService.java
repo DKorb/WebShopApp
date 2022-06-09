@@ -1,7 +1,7 @@
 package com.webshopapp.adminpanel.service;
 
 
-import com.webshopapp.adminpanel.entity.category.Category;
+import com.webshopapp.common.entity.category.Category;
 import com.webshopapp.adminpanel.exceptions.CategoryNotFoundException;
 import com.webshopapp.adminpanel.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;

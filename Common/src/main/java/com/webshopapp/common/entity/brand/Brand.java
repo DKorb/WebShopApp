@@ -1,6 +1,6 @@
-package com.webshopapp.adminpanel.entity.brand;
+package com.webshopapp.common.entity.brand;
 
-import com.webshopapp.adminpanel.entity.category.Category;
+import com.webshopapp.common.entity.category.Category;
 import lombok.Getter;
 import lombok.Setter;
 
