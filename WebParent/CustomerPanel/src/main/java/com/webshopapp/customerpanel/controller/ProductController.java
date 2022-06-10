@@ -1,0 +1,55 @@
+package com.webshopapp.customerpanel.controller;
+
+import com.webshopapp.common.entity.category.Category;
+import com.webshopapp.common.entity.product.Product;
+import com.webshopapp.customerpanel.service.CategoryService;
+import com.webshopapp.customerpanel.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.List;
+
+@Controller
+public class ProductController {
+
+    @Autowired
+    private CategoryService categoryService;
+
+    @Autowired
+    private ProductService productService;
+
+    @GetMapping("/categories/{category_alias}")
+    public String viewCategoryFirstPage(@PathVariable("category_alias") String alias,
+                                        Model model) {
+        return viewCategoryByPage(alias, 1, model);
+    }
+
+    @GetMapping("/categories/{category_alias}/page/{pageNumber}")
+    public String viewCategoryByPage(@PathVariable("category_alias") String alias,
+                                     @PathVariable("pageNumber") int pageNumber,
+                                     Model model) {
+        Category category = categoryService.getCategory(alias);
+
+        Page<Product> productPage = productService.listByCategory(pageNumber, category.getId());
+        List<Product> productList = productPage.getContent();
+
+        long startCount = ((long) (pageNumber - 1) * ProductService.PRODUCTS_PER_PAGE + 1);
+        long endCount = startCount + ProductService.PRODUCTS_PER_PAGE - 1;
+
+        if (endCount > productPage.getTotalElements()) {
+            productPage.getTotalElements();
+        }
+
+        model.addAttribute("currentProductPage", pageNumber);
+        model.addAttribute("totalProductPages", productPage.getTotalPages());
+        model.addAttribute("productList", productList);
+        model.addAttribute("pageTitle", category.getName() + " - WebShop");
+        model.addAttribute("category", category);
+
+        return "products_by_category";
+    }
+}
