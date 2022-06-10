@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: page_head('none')">
+    <title>WebShopApp Customer Panel</title>
+</head>
+<body>
+<div class="container-fluid">
+
+    <div th:replace="fragments :: navigation"></div>
+
+    <div class="carousel-inner py-4">
+        <div class="carousel-item active">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 text-center" th:each="category : ${listCategories}">
+                        <div class="card mb-5"
+                             style="height: 350px; width: 400px; display: block; margin-left: auto; margin-right: auto">
+                            <img th:src="@{${category.imagePath}}" class="card-img-top" style="max-width: 200px"/>
+                            <div class="card-body">
+                                <a th:href="@{'/categories/' + ${category.alias}}" class="card-title">[[${category.name}]]</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <p>WebShop Customer Panel - Copyright &copy; Dawid Korbecki</p>
+    </div>
+</div>
+</body>
+</html>
