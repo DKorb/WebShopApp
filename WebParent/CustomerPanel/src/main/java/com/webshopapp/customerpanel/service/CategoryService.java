@@ -14,7 +14,10 @@ public class CategoryService {
     private CategoryRepository categoryRepository;
 
     public List<Category> listAllCategories() {
-        List<Category> allEnabledCategories = categoryRepository.findAllEnabledCategories();
-        return allEnabledCategories;
+        return categoryRepository.findAllEnabledCategories();
+    }
+
+    public Category getCategory(String alias) {
+        return categoryRepository.findCategoryByAlias(alias);
     }
 }

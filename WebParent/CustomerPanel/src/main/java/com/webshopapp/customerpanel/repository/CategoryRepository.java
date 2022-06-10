@@ -10,4 +10,7 @@ public interface CategoryRepository extends CrudRepository<Category, Integer> {
 
     @Query("SELECT c FROM Category c WHERE c.status = true ORDER BY c.name ASC")
     public List<Category> findAllEnabledCategories();
+
+    @Query("SELECT c FROM Category c WHERE c.alias = ?1 AND c.status = true")
+    public Category findCategoryByAlias(String alias);
 }
