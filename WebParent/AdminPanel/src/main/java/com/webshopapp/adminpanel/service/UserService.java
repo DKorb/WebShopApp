@@ -3,7 +3,7 @@ package com.webshopapp.adminpanel.service;
 
 import com.webshopapp.common.entity.role.Role;
 import com.webshopapp.common.entity.user.User;
-import com.webshopapp.adminpanel.exceptions.UserNotFoundException;
+import com.webshopapp.common.exceptions.UserNotFoundException;
 import com.webshopapp.adminpanel.repository.RoleRepository;
 import com.webshopapp.adminpanel.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
