@@ -2,6 +2,8 @@ package com.webshopapp.customerpanel.controller;
 
 import com.webshopapp.common.entity.category.Category;
 import com.webshopapp.common.entity.product.Product;
+import com.webshopapp.common.exceptions.CategoryNotFoundException;
+import com.webshopapp.common.exceptions.ProductNotFoundException;
 import com.webshopapp.customerpanel.service.CategoryService;
 import com.webshopapp.customerpanel.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +26,15 @@ public class ProductController {
 
     @GetMapping("/categories/{category_alias}")
     public String viewCategoryFirstPage(@PathVariable("category_alias") String alias,
-                                        Model model) {
+                                        Model model) throws CategoryNotFoundException {
         return viewCategoryByPage(alias, 1, model);
     }
 
     @GetMapping("/categories/{category_alias}/page/{pageNumber}")
     public String viewCategoryByPage(@PathVariable("category_alias") String alias,
                                      @PathVariable("pageNumber") int pageNumber,
-                                     Model model) {
+                                     Model model) throws CategoryNotFoundException {
+
         Category category = categoryService.getCategory(alias);
 
         Page<Product> productPage = productService.listByCategory(pageNumber, category.getId());
@@ -50,6 +53,20 @@ public class ProductController {
         model.addAttribute("pageTitle", category.getName() + " - WebShop");
         model.addAttribute("category", category);
 
-        return "products_by_category";
+
+        return "product/products_by_category";
+    }
+
+    @GetMapping("/product/{product_alias}")
+    public String viewProductDetail(@PathVariable("product_alias") String alias,
+                                    Model model) throws ProductNotFoundException {
+
+        Product product = productService.getProduct(alias);
+
+        model.addAttribute("pageTitle", product.getName() + " - WebShop");
+        model.addAttribute("product", product);
+
+        return "product/product_detail";
+
     }
 }

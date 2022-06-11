@@ -21,4 +21,14 @@ public class ProductService {
         Pageable pageable = PageRequest.of(pageNumber - 1, PRODUCTS_PER_PAGE);
         return productRepository.getAllProductByCategory(categoryID, pageable);
     }
+
+    public Product getProduct(String alias) throws ProductNotFoundException {
+        Product productByAlias = productRepository.getProductByAlias(alias);
+
+        if (productByAlias == null) {
+            throw new ProductNotFoundException("Could not find any product with alias" + alias);
+        }
+
+        return productByAlias;
+    }
 }
