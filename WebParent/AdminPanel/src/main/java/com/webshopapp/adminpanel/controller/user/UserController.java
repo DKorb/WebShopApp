@@ -4,6 +4,7 @@ import com.webshopapp.common.entity.role.Role;
 import com.webshopapp.common.entity.user.User;
 import com.webshopapp.common.exceptions.UserNotFoundException;
 import com.webshopapp.adminpanel.service.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -16,19 +17,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @Controller
+@AllArgsConstructor
 public class UserController {
 
-    @Autowired
     private UserService userService;
-
-/*    @GetMapping("/users")
-    public String listAll(Model model) {
-
-        List<User> usersList = userService.listAll();
-        model.addAttribute("usersList", usersList);
-
-        return "users";
-    }*/
 
     @GetMapping("/users")
     public String listFirstPage(Model model) {

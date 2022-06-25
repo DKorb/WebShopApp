@@ -4,6 +4,7 @@ package com.webshopapp.adminpanel.service;
 import com.webshopapp.common.entity.brand.Brand;
 import com.webshopapp.common.exceptions.BrandNotFoundException;
 import com.webshopapp.adminpanel.repository.BrandRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,15 +17,15 @@ import java.util.NoSuchElementException;
 
 @Service
 @Transactional
+@AllArgsConstructor
 public class BrandService {
 
     public static final int BRAND_PER_PAGE = 5;
 
-    @Autowired
     private BrandRepository brandRepository;
 
     public List<Brand> listAllBrands() {
-        return (List<Brand>) brandRepository.findAll();
+        return brandRepository.findAll();
     }
 
     public Brand get(Integer id) throws BrandNotFoundException {

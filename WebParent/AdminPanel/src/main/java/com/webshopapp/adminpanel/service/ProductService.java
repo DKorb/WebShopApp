@@ -4,6 +4,7 @@ package com.webshopapp.adminpanel.service;
 import com.webshopapp.common.entity.product.Product;
 import com.webshopapp.common.exceptions.ProductNotFoundException;
 import com.webshopapp.adminpanel.repository.ProductRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,11 +19,11 @@ import java.util.NoSuchElementException;
 
 @Service
 @Transactional
+@AllArgsConstructor
 public class ProductService {
 
     public static final int PRODUCT_PER_PAGE = 5;
 
-    @Autowired
     private ProductRepository productRepository;
 
     public List<Product> listAllProducts() {

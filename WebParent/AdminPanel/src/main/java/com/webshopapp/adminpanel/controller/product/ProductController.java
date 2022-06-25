@@ -7,6 +7,7 @@ import com.webshopapp.common.entity.product.Product;
 import com.webshopapp.common.exceptions.ProductNotFoundException;
 import com.webshopapp.adminpanel.service.BrandService;
 import com.webshopapp.adminpanel.service.ProductService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -23,22 +24,12 @@ import java.io.IOException;
 import java.util.List;
 
 @Controller
+@AllArgsConstructor
 public class ProductController {
 
-    @Autowired
     private ProductService productService;
 
-    @Autowired
     private BrandService brandService;
-
-/*    @GetMapping("/products")
-    public String listAllProducts(Model model) {
-        List<Product> productList = productService.listAllProducts();
-
-        model.addAttribute("productList", productList);
-
-        return "products/products";
-    }*/
 
     @GetMapping("/products")
     public String listFirstPage(Model model) {

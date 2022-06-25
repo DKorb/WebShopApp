@@ -2,10 +2,8 @@ package com.webshopapp.adminpanel.repository;
 
 
 import com.webshopapp.common.entity.role.Role;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@Repository
-public interface RoleRepository extends CrudRepository<Role, Integer> {
+public interface RoleRepository extends JpaRepository<Role, Integer> {
 
 }

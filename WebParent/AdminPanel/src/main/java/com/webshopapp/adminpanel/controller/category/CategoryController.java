@@ -5,6 +5,7 @@ import com.webshopapp.adminpanel.controller.file.FileUploadUtil;
 import com.webshopapp.common.entity.category.Category;
 import com.webshopapp.common.exceptions.CategoryNotFoundException;
 import com.webshopapp.adminpanel.service.CategoryService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -21,22 +22,10 @@ import java.io.IOException;
 import java.util.List;
 
 @Controller
+@AllArgsConstructor
 public class CategoryController {
 
-    @Autowired
     private CategoryService categoryService;
-
-    public CategoryController(CategoryService categoryService) {
-        this.categoryService = categoryService;
-    }
-
-    /*    @GetMapping("/categories")
-    public String listAllCategories(Model model) {
-        List<Category> categoryList = categoryService.listAllCategories();
-        model.addAttribute("categoryList", categoryList);
-
-        return "categories";
-    }*/
 
     @GetMapping("/categories")
     public String listFirstPage(Model model) {

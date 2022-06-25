@@ -6,6 +6,7 @@ import com.webshopapp.common.exceptions.CategoryNotFoundException;
 import com.webshopapp.common.exceptions.ProductNotFoundException;
 import com.webshopapp.customerpanel.service.CategoryService;
 import com.webshopapp.customerpanel.service.ProductService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -16,12 +17,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
 
 @Controller
+@AllArgsConstructor
 public class ProductController {
 
-    @Autowired
+
     private CategoryService categoryService;
 
-    @Autowired
     private ProductService productService;
 
     @GetMapping("/categories/{category_alias}")

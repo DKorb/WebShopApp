@@ -6,6 +6,7 @@ import com.webshopapp.common.entity.brand.Brand;
 import com.webshopapp.common.entity.category.Category;
 import com.webshopapp.common.exceptions.BrandNotFoundException;
 import com.webshopapp.adminpanel.service.BrandService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,9 +17,9 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
+@AllArgsConstructor
 public class BrandRestController {
 
-    @Autowired
     private BrandService brandService;
 
     @GetMapping("/brands/{id}/categories")

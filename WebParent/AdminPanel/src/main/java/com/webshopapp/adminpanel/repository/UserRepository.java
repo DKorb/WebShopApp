@@ -11,11 +11,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends PagingAndSortingRepository<User, Integer> {
     @Query("SELECT user from User user WHERE user.email = :email")
-    public User getUserByEmail(@Param("email") String email);
+    User getUserByEmail(@Param("email") String email);
 
-    public Long countById(Integer id);
+    Long countById(Integer id);
 
     @Query("UPDATE User user SET user.status = ?2 WHERE user.id = ?1")
     @Modifying
-    public void updateStatus(Integer id, boolean status);
+    void updateStatus(Integer id, boolean status);
 }

@@ -6,7 +6,7 @@ import com.webshopapp.common.entity.category.Category;
 import com.webshopapp.common.exceptions.BrandNotFoundException;
 import com.webshopapp.adminpanel.service.BrandService;
 import com.webshopapp.adminpanel.service.CategoryService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,12 +22,11 @@ import java.io.IOException;
 import java.util.List;
 
 @Controller
+@AllArgsConstructor
 public class BrandController {
 
-    @Autowired
     private BrandService brandService;
 
-    @Autowired
     private CategoryService categoryService;
 
     @GetMapping("/brands")

@@ -6,6 +6,7 @@ import com.webshopapp.common.entity.user.User;
 import com.webshopapp.common.exceptions.UserNotFoundException;
 import com.webshopapp.adminpanel.repository.RoleRepository;
 import com.webshopapp.adminpanel.repository.UserRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,22 +20,16 @@ import java.util.NoSuchElementException;
 
 @Service
 @Transactional
+@AllArgsConstructor
 public class UserService {
 
     public static final int USERS_PER_PAGE = 10;
 
-    @Autowired
     private RoleRepository roleRepository;
 
-    @Autowired
     private UserRepository userRepository;
 
-    @Autowired
     private PasswordEncoder passwordEncoder;
-
-    public List<User> listAllUsers() {
-        return (List<User>) userRepository.findAll();
-    }
 
     public List<Role> listAllRoles() {
         return (List<Role>) roleRepository.findAll();

@@ -4,6 +4,7 @@ package com.webshopapp.adminpanel.service;
 import com.webshopapp.common.entity.category.Category;
 import com.webshopapp.common.exceptions.CategoryNotFoundException;
 import com.webshopapp.adminpanel.repository.CategoryRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,11 +17,11 @@ import java.util.NoSuchElementException;
 
 @Service
 @Transactional
+@AllArgsConstructor
 public class CategoryService {
 
     public static final int CATEGORY_PER_PAGE = 5;
 
-    @Autowired
     private CategoryRepository categoryRepository;
 
 
