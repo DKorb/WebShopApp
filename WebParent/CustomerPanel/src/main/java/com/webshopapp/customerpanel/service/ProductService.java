@@ -15,12 +15,13 @@ import org.springframework.stereotype.Service;
 public class ProductService {
 
     public static final int PRODUCTS_PER_PAGE = 10;
+    public static final int SEARCH_RESULT_PER_PAGE = 10;
 
     ProductRepository productRepository;
 
     public Page<Product> listByCategory(int pageNumber, Integer categoryID) {
-        Pageable pageable = PageRequest.of(pageNumber - 1, PRODUCTS_PER_PAGE);
-        return productRepository.getAllProductByCategory(categoryID, pageable);
+        Pageable page = PageRequest.of(pageNumber - 1, PRODUCTS_PER_PAGE);
+        return productRepository.getAllProductByCategory(categoryID, page);
     }
 
     public Product getProduct(String alias) throws ProductNotFoundException {
@@ -31,5 +32,10 @@ public class ProductService {
         }
 
         return productByAlias;
+    }
+
+    public Page<Product> search(String keyword, int pageNumber) {
+        var page = PageRequest.of(pageNumber - 1, SEARCH_RESULT_PER_PAGE);
+        return productRepository.searchProductByNameAndFullDescription(keyword, page);
     }
 }
