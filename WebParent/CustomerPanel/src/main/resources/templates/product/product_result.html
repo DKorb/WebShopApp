@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: page_head('none')">
+    <title>WebShopApp Product Results</title>
+</head>
+<body>
+<div class="container-fluid">
+
+    <div th:replace="fragments :: navigation"></div>
+    <div th:replace="fragments :: search_nav"></div>
+
+    <div th:if="${totalProductPages} > 0">
+        <h3>Search Results for '[[${keyword}]]'</h3>
+    </div>
+    <div th:unless="${totalProductPages}">
+        <h3>No match found for '[[${keyword}]]'</h3>
+    </div>
+
+    <div class="carousel-inner py-4">
+        <div class="carousel-item active">
+            <div class="container">
+                <div class="row">
+                    <th:block th:each="product : ${productResults}">
+                        <div class="col-lg-3 text-center">
+                            <div th:replace="product/product_fragment :: content"></div>
+                        </div>
+                    </th:block>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="m-5">
+        <ul class="pagination justify-content-center">
+            <li th:class="${currentProductPage > 1 ? 'page-item' : 'page-item disabled'}">
+                <a class="page-link"
+                   th:href="@{'/search/page/' + ${currentProductPage - 1}}">Previous</a>
+            </li>
+
+            <li th:class="${currentProductPage != i ? 'page-item': 'page-item active'}"
+                th:each="i : ${#numbers.sequence(1, totalProductPages)}">
+                <a class="page-link" th:href="@{'/search/page/' + ${i}}">[[${i}]]</a>
+            </li>
+
+            <li th:class="${currentProductPage < totalProductPages ? 'page-item' : 'page-item disabled'}">
+                <a class="page-link"
+                   th:href="@{'/search/page/' + ${currentProductPage + 1}}">Next</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="text-center">
+        <p>WebShop Customer Panel - Copyright &copy; Dawid Korbecki</p>
+    </div>
+</div>
+</body>
+</html>
