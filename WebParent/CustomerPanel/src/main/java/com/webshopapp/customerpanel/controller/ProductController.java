@@ -7,8 +7,8 @@ import com.webshopapp.common.exceptions.ProductNotFoundException;
 import com.webshopapp.customerpanel.service.CategoryService;
 import com.webshopapp.customerpanel.service.ProductService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -69,5 +69,34 @@ public class ProductController {
 
         return "product/product_detail";
 
+    }
+
+    @GetMapping("/search")
+    public String searchFirstPage(@Param("keyword") String keyword,
+                                  Model model) {
+        return searchProductsByPage(keyword, model, 1);
+    }
+
+    @GetMapping("/search/page/{pageNumber}")
+    public String searchProductsByPage(@Param("keyword") String keyword,
+                                Model model,
+                                @PathVariable("pageNumber") int pageNumber) {
+
+        var pageProducts = productService.search(keyword, pageNumber);
+        var productResults = pageProducts.getContent();
+
+        long startCount = ((long) (pageNumber - 1) * ProductService.SEARCH_RESULT_PER_PAGE + 1);
+        long endCount = startCount + ProductService.SEARCH_RESULT_PER_PAGE - 1;
+
+        if (endCount > pageProducts.getTotalElements()) {
+            pageProducts.getTotalElements();
+        }
+
+        model.addAttribute("currentProductPage", pageNumber);
+        model.addAttribute("totalProductPages", pageProducts.getTotalPages());
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("productResults", productResults);
+
+        return "product/product_result";
     }
 }

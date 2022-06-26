@@ -34,5 +34,18 @@
         </nav>
     </div>
 </div>
+<div th:fragment="search_nav" class="row">
+    <div class="col-md">
+        <div class="input-group m-3" style="width: 250px">
+            <form class="form-inline" th:action="@{/search}" method="get">
+                <div class="input-group">
+                    <input type="search" class="form-control rounded" name="keyword" th:value="${keyword}"
+                           placeholder="Search" aria-label="Search" aria-describedby="search-addon" required/>
+                    <input type="submit" class="btn btn-outline-primary" value="Search"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 </html>
