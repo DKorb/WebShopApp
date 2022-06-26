@@ -16,8 +16,10 @@ The application is designed to manage an electronics online shop. It allows you 
 ```sh
 coming soon :)
 ```
-Default administration account -
-Email: dawid.korbecki@java.com Password: Pa$$w0rd!
+
+|Role|E-mail|Password|
+|:---|:---|:---:|
+|Admin|dawid.korbecki@java.com|Pa$$w0rd!|
 
 ## Technologies
 * Java 11
