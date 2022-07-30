@@ -2,7 +2,7 @@ package com.webshopapp.adminpanel;
 
 
 import com.webshopapp.common.entity.role.Role;
-import com.webshopapp.adminpanel.repository.RoleRepository;
+import com.webshopapp.adminpanel.role.RoleRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;

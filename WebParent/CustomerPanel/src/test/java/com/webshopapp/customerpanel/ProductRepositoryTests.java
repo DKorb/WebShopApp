@@ -1,7 +1,7 @@
 package com.webshopapp.customerpanel;
 
 import com.webshopapp.common.entity.product.Product;
-import com.webshopapp.customerpanel.repository.ProductRepository;
+import com.webshopapp.customerpanel.product.ProductRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;

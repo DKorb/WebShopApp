@@ -4,7 +4,7 @@ package com.webshopapp.adminpanel;
 import com.webshopapp.common.entity.brand.Brand;
 import com.webshopapp.common.entity.category.Category;
 import com.webshopapp.common.entity.product.Product;
-import com.webshopapp.adminpanel.repository.ProductRepository;
+import com.webshopapp.adminpanel.product.ProductRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
