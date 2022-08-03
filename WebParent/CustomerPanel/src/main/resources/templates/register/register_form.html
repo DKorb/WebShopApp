@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: page_head('none')"></head>
+<head th:replace="fragments :: page_head('none')">
+    <title>WebShopApp Customer Panel</title>
+</head>
 <body>
 <div class="container-fluid">
 
     <div th:replace="fragments :: navigation"></div>
 
-    <div class="text-center">
-        <h2 class="bold">[[${pageTitle}]]</h2>
-    </div>
-    <form th:action="@{/users/save}" method="post"
-          style="max-width: 700px; margin: 0 auto" th:object="${user}">
+    <form th:action="@{/create_customer}" method="post"
+          style="max-width: 700px; margin: 0 auto" th:object="${customer}">
         <input type="hidden" th:field="*{id}"/>
         <div class="border border-5 rounded p-3">
 
@@ -34,50 +33,55 @@
                 <label class="col-sm-2 col-form-label">E-mail:</label>
                 <div class="col-sm-8">
                     <input type="email" class="form-control" th:field="*{email}"
-                           th:if="${user.email != null}" required minlength="3" maxlength="48" readonly/>
-                    <input type="email" class="form-control" th:field="*{email}"
-                           th:unless="${user.email != null}" required minlength="3" maxlength="48"/>
+                           required minlength="6" maxlength="48"/>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Password:</label>
                 <div class="col-sm-8">
-                    <input th:if="${user.id == null}" type="password" class="form-control"
-                           th:field="*{password}" required minlength="8" maxlength="48"/>
-                    <input th:unless="${user.id == null}" type="password" class="form-control"
-                           th:field="*{password}" minlength="8" maxlength="48"/>
+                    <input type="password" class="form-control" th:field="*{password}"
+                           required minlength="6" maxlength="48"/>
                 </div>
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Roles:</label>
-                <div class="m-2">
-                    <th:block th:each="role : ${listRoles}">
-                        <input class="form-check-input" type="checkbox" th:field="*{roles}"
-                               th:text="${role.name}" th:value="${role.id}"/><br>
-                    </th:block>
+                <label class="col-sm-2 col-form-label">Phone Number:</label>
+                <div class="col-sm-8">
+                    <input type="number" class="form-control" th:field="*{phoneNumber}"
+                           required minlength="6" maxlength="12"/>
                 </div>
             </div>
 
-            <div class="text-center">
-                <label class="col-form-label">Enable the account ? </label>
-                <div>
-                    <input class="form-check-input" type="checkbox" th:field="*{status}"/>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Address:</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" th:field="*{address}"
+                           required minlength="6" maxlength="64"/>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">City:</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" th:field="*{city}"
+                           required minlength="6" maxlength="64"/>
                 </div>
             </div>
 
             <div class="text-center">
                 <div class="m-3">
-                    <input type="submit" value="CREATE" class="btn btn-primary"/>
+                    <input type="submit" value="REGISTER" class="btn btn-primary"/>
                     <input type="button" value="CANCEL" class="btn btn-warning" id="buttonCancel"/>
                 </div>
             </div>
-
         </div>
     </form>
+
+    <div class="text-center">
+        <p>WebShop Customer Panel - Copyright &copy; Dawid Korbecki</p>
+    </div>
+
 </div>
-<script th:src="@{/javascript/logout.js}"></script>
-<div th:replace="fragments :: scripts"></div>
 </body>
 </html>

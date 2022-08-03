@@ -1,7 +1,7 @@
 package com.webshopapp.customerpanel;
 
 import com.webshopapp.common.entity.category.Category;
-import com.webshopapp.customerpanel.repository.CategoryRepository;
+import com.webshopapp.customerpanel.category.CategoryRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
