@@ -31,7 +31,6 @@ public class User {
     @Column(name = "last_name", length = 24, nullable = false)
     private String lastName;
 
-    @Column
     private boolean status;
 
     @ManyToMany(fetch = FetchType.EAGER)
