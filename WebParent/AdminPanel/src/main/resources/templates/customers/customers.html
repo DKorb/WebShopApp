@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: page_head('none')"></head>
+<body>
+<div class="container-fluid">
+
+    <div th:replace="fragments :: navigation"></div>
+
+    <div class="alert alert-success" role="alert" th:if="${message != null}">
+        [[${message}]]
+    </div>
+
+    <div>
+        <table class="table align-middle mb-0 bg-white">
+            <thead class="bg-light">
+            <tr>
+                <th>Customer ID</th>
+                <th>E-mail</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Phone Number</th>
+                <th>Account Created</th>
+                <th>City</th>
+                <th>Address</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="customer : ${customersList}">
+                <td>
+                    [[${customer.id}]]
+                </td>
+                <td>
+                    [[${customer.email}]]
+                </td>
+                <td>
+                    [[${customer.firstName}]]
+                </td>
+                <td>
+                    [[${customer.lastName}]]
+                </td>
+                <td>
+                    [[${customer.phoneNumber}]]
+                </td>
+                <td>
+                    [[${customer.createdTime}]]
+                </td>
+                <td>
+                    [[${customer.city}]]
+                </td>
+                <td>
+                    [[${customer.address}]]
+                </td>
+                <td>
+                    <a th:if="${customer.status == true}" th:href="@{'/customers/' + ${customer.id} + '/status/false'}"
+                       class="far fa-check-square fa-2x" style="color: #3333FF"></a>
+                    <a th:if="${customer.status == false}" th:href="@{'/customers/' + ${customer.id} + '/status/true'}"
+                       class="far fa-check-square fa-2x" style="color: #D1D1D1"></a>
+                </td>
+                <td>
+                    <a type="button" class="btn btn-link btn-sm btn-rounded" th:href="@{'/customers/edit/' + ${customer.id}}">
+                        Edit
+                    </a>
+                    <a type="button" class="btn btn-link btn-sm btn-rounded" th:href="@{'/customers/delete/' + ${customer.id}}">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="m-5">
+        <ul class="pagination justify-content-center">
+            <li th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}">
+                <a class="page-link" th:href="@{'/customers/page/' + ${currentPage - 1}}">Previous</a>
+            </li>
+
+            <li th:class="${currentPage != i ? 'page-item': 'page-item active'}"
+                th:each="i : ${#numbers.sequence(1, totalPages)}">
+                <a class="page-link" th:href="@{'/customers/page/' + ${i}}">[[${i}]]</a>
+            </li>
+
+            <li th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}">
+                <a class="page-link" th:href="@{'/customers/page/' + ${currentPage + 1}}">Next</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="text-center">
+        <p>Customers Panel - Copyright &copy; Dawid Korbecki</p>
+    </div>
+</div>
+<script th:src="@{/javascript/logout.js}"></script>
+</body>
+</html>
