@@ -1,6 +1,9 @@
 package com.webshopapp.adminpanel.customer;
 
 import com.webshopapp.common.entity.customer.Customer;
+import com.webshopapp.common.entity.user.User;
+import com.webshopapp.common.exceptions.CustomerNotFoundException;
+import com.webshopapp.common.exceptions.UserNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -30,5 +33,16 @@ public class CustomerService {
         Pageable pageable = PageRequest.of(pageNumber - 1, CUSTOMERS_PER_PAGE);
         return customerRepository.findAll(pageable);
     }
+
+    public void deleteCustomer(Integer id) throws CustomerNotFoundException {
+        Long countById = customerRepository.countById(id);
+
+        if (countById == null || countById == 0) {
+            throw new CustomerNotFoundException("Could not find aby customer with ID " + id);
+        }
+
+        customerRepository.deleteById(id);
+    }
+
 
 }
