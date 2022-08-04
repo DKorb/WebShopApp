@@ -57,5 +57,19 @@ public class CustomerController {
         return "redirect:/customers";
     }
 
+    @GetMapping("/customers/{id}/status/{status}")
+    public String changeStatus(@PathVariable("id") Integer id,
+                               @PathVariable("status") boolean status,
+                               RedirectAttributes redirectAttributes) {
+
+        customerService.updateCustomerStatus(id, status);
+
+        String message = status ? "enabled" : "disabled";
+        redirectAttributes.addFlashAttribute("message", "The customer ID " + id +
+                " has been " + message);
+
+        return "redirect:/customers";
+    }
+
 
 }
