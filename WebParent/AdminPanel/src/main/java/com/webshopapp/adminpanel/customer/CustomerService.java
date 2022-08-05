@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.NoSuchElementException;
 
 @Service
 @Transactional
@@ -44,5 +45,35 @@ public class CustomerService {
         customerRepository.deleteById(id);
     }
 
+    public void updateCustomerStatus(Integer id, boolean status) {
+        customerRepository.updateStatus(id, status);
+    }
 
+    public Customer getCustomer(Integer id) throws CustomerNotFoundException {
+        try {
+            return customerRepository.findById(id).get();
+        } catch (NoSuchElementException ex) {
+            throw new CustomerNotFoundException("Could not find aby customer with ID " + id);
+        }
+    }
+
+    public void save(Customer customer) {
+        boolean isUpdatingCustomer = (customer.getId() != null);
+        Customer existingCustomer = customerRepository.findById(customer.getId()).get();
+
+        if (isUpdatingCustomer) {
+            if (customer.getPassword().isEmpty()) {
+                customer.setPassword(existingCustomer.getPassword());
+            } else {
+                encodePassword(customer);
+            }
+        } else {
+            encodePassword(customer);
+        }
+
+        customer.setStatus(existingCustomer.isStatus());
+        customer.setCreatedTime(existingCustomer.getCreatedTime());
+
+        customerRepository.save(customer);
+    }
 }

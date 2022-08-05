@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -57,5 +58,43 @@ public class CustomerController {
         return "redirect:/customers";
     }
 
+    @GetMapping("/customers/{id}/status/{status}")
+    public String changeStatus(@PathVariable("id") Integer id,
+                               @PathVariable("status") boolean status,
+                               RedirectAttributes redirectAttributes) {
+
+        customerService.updateCustomerStatus(id, status);
+
+        String message = status ? "enabled" : "disabled";
+        redirectAttributes.addFlashAttribute("message", "The customer ID " + id +
+                " has been " + message);
+
+        return "redirect:/customers";
+    }
+
+    @GetMapping("/customers/edit/{id}")
+    public String editCustomer(@PathVariable(name = "id") Integer id,
+                           Model model,
+                           RedirectAttributes redirectAttributes) {
+        try {
+
+            Customer customer = customerService.getCustomer(id);
+
+            model.addAttribute("customer", customer);
+            model.addAttribute("pageTitle", "Edit Customer (ID: " + id + ")");
+
+            return "customers/customers_form";
+        } catch (CustomerNotFoundException ex) {
+            redirectAttributes.addFlashAttribute("message", ex.getMessage());
+            return "redirect:/customers";
+        }
+    }
+
+    @PostMapping("/customers/save")
+    public String saveCustomer(Customer customer, RedirectAttributes redirectAttributes) {
+        customerService.save(customer);
+        redirectAttributes.addFlashAttribute("message", "The customer has been saved successfully!");
+        return "redirect:/customers";
+    }
 
 }
