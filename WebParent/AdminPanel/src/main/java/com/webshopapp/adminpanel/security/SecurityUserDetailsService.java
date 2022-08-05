@@ -19,7 +19,6 @@ public class SecurityUserDetailsService implements UserDetailsService {
         User user = userRepository.getUserByEmail(email);
         if (user != null) {
             return new SecurityUserDetails(user);
-        }
-        throw new UsernameNotFoundException("Could not find user with email  " + email);
+        } else throw new UsernameNotFoundException("Can't find user with email  " + email);
     }
 }
