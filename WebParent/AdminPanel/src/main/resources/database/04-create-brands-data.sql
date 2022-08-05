@@ -1,0 +1,62 @@
+--liquibase formatted SQL
+--changeset DKorb:4
+
+INSERT INTO `brands` VALUES (1,'benq_logo.png','BenQ');
+INSERT INTO `brands` VALUES (2,'lg_logo.png','LG');
+INSERT INTO `brands` VALUES (3,'intel_logo.png','Intel');
+INSERT INTO `brands` VALUES (4,'dell_logo.png','Dell');
+INSERT INTO `brands` VALUES (5,'hp_logo.png','HP');
+INSERT INTO `brands` VALUES (6,'asus_logo.png','Asus');
+INSERT INTO `brands` VALUES (7,'sony_logo.png','Sony');
+INSERT INTO `brands` VALUES (8,'lenovo_logo.png','Lenovo');
+INSERT INTO `brands` VALUES (9,'samsung_logo.png','Samsung');
+INSERT INTO `brands` VALUES (10,'amd_logo.png','AMD');
+INSERT INTO `brands` VALUES (12,'acer_logo.png','Acer');
+INSERT INTO `brands` VALUES (13,'kingston_logo.png','Kingston');
+INSERT INTO `brands` VALUES (14,'oppo_logo.png','OPPO');
+
+
+INSERT INTO `brands_categories` VALUES (3,1);
+INSERT INTO `brands_categories` VALUES (4,1);
+INSERT INTO `brands_categories` VALUES (5,1);
+INSERT INTO `brands_categories` VALUES (6,1);
+INSERT INTO `brands_categories` VALUES (12,1);
+INSERT INTO `brands_categories` VALUES (2,2);
+INSERT INTO `brands_categories` VALUES (5,2);
+INSERT INTO `brands_categories` VALUES (7,2);
+INSERT INTO `brands_categories` VALUES (8,2);
+INSERT INTO `brands_categories` VALUES (9,2);
+INSERT INTO `brands_categories` VALUES (2,3);
+INSERT INTO `brands_categories` VALUES (3,3);
+INSERT INTO `brands_categories` VALUES (7,3);
+INSERT INTO `brands_categories` VALUES (9,3);
+INSERT INTO `brands_categories` VALUES (10,3);
+INSERT INTO `brands_categories` VALUES (13,3);
+INSERT INTO `brands_categories` VALUES (2,4);
+INSERT INTO `brands_categories` VALUES (4,4);
+INSERT INTO `brands_categories` VALUES (5,4);
+INSERT INTO `brands_categories` VALUES (6,4);
+INSERT INTO `brands_categories` VALUES (8,4);
+INSERT INTO `brands_categories` VALUES (9,4);
+INSERT INTO `brands_categories` VALUES (12,4);
+INSERT INTO `brands_categories` VALUES (6,5);
+INSERT INTO `brands_categories` VALUES (7,5);
+INSERT INTO `brands_categories` VALUES (9,5);
+INSERT INTO `brands_categories` VALUES (14,5);
+INSERT INTO `brands_categories` VALUES (5,6);
+INSERT INTO `brands_categories` VALUES (7,6);
+INSERT INTO `brands_categories` VALUES (9,6);
+INSERT INTO `brands_categories` VALUES (12,6);
+INSERT INTO `brands_categories` VALUES (1,7);
+INSERT INTO `brands_categories` VALUES (2,7);
+INSERT INTO `brands_categories` VALUES (4,7);
+INSERT INTO `brands_categories` VALUES (7,7);
+INSERT INTO `brands_categories` VALUES (8,7);
+INSERT INTO `brands_categories` VALUES (9,7);
+INSERT INTO `brands_categories` VALUES (12,7);
+INSERT INTO `brands_categories` VALUES (3,8);
+INSERT INTO `brands_categories` VALUES (10,8);
+INSERT INTO `brands_categories` VALUES (7,9);
+INSERT INTO `brands_categories` VALUES (3,10);
+INSERT INTO `brands_categories` VALUES (6,10);
+INSERT INTO `brands_categories` VALUES (10,10);

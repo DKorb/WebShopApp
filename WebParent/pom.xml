@@ -107,12 +107,6 @@
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.liquibase</groupId>
-            <artifactId>liquibase-core</artifactId>
-            <version>4.14.0</version>
-        </dependency>
-
     </dependencies>
 
 </project>
