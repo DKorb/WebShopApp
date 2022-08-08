@@ -16,24 +16,52 @@
 <body>
 <div th:fragment="navigation">
     <div>
+        <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutAction">
+            <input th:type="submit"/>
+        </form>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" th:href="@{/}">WebShop Customer</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="topNavbar">
-                <div class="navbar-nav">
-                    <a class="nav-item nav-link" th:href="@{/careers}">Careers</a>
-                    <a class="nav-item nav-link" th:href="@{/payments}">Payments</a>
-                    <a class="nav-item nav-link" th:href="@{/shipping}">Shipping</a>
-                    <a class="nav-item nav-link" th:href="@{/login}">Login</a>
-                    <a class="nav-item nav-link" th:href="@{/register}">Register</a>
-                    <a class="nav-item nav-link" th:href="@{/contact}">Contact</a>
-                </div>
+                <th:block sec:authorize="!isAuthenticated()">
+                    <div class="navbar-nav">
+                        <a class="nav-item nav-link" th:href="@{/login}">Login</a>
+                        <a class="nav-item nav-link" th:href="@{/register}">Register</a>
+                    </div>
+                </th:block>
+                <th:block sec:authorize="isAuthenticated()">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                            <div>
+                                <a class="nav-link fas fa-shopping-cart" th:href="@{/cart}"></a>
+                            </div>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink"
+                                   role="button"
+                                   data-bs-toggle="dropdown" aria-expanded="false"
+                                   sec:authentication="principal.accountName">
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
+                                    <li>
+                                        <a class="dropdown-item" id="logoutItem">Logout</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </th:block>
             </div>
         </nav>
     </div>
 </div>
+
 <div th:fragment="search_nav" class="row">
     <div class="col-md">
         <div class="input-group m-3" style="width: 250px">
@@ -46,6 +74,16 @@
             </form>
         </div>
     </div>
+</div>
+
+<div th:fragment="scripts">
+    <script>
+        $(document).ready(function () {
+            $("#buttonCancel").on("click", function () {
+                window.location = "[[@{/}]]";
+            });
+        });
+    </script>
 </div>
 </body>
 </html>

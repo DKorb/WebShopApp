@@ -2,7 +2,9 @@ package com.webshopapp.common.entity.product;
 
 import com.webshopapp.common.entity.category.Category;
 import com.webshopapp.common.entity.brand.Brand;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -13,6 +15,8 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "products")
 public class Product {
 
@@ -62,6 +66,10 @@ public class Product {
 
     public void addDetails(Integer id, String name, String value) {
         this.details.add(new ProductDetail(id, name, value, this));
+    }
+
+    public Product(Integer id) {
+        this.id = id;
     }
 
     @Override

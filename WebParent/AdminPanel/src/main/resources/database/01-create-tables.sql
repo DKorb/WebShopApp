@@ -90,3 +90,13 @@ CREATE TABLE customers
     phone_number VARCHAR(12)     NOT NULL,
     status       BIT(1)          NOT NULL
 );
+
+CREATE TABLE cart_items
+(
+    id          INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    quantity    INT             NOT NULL,
+    customer_id INT DEFAULT NULL,
+    product_id  INT DEFAULT NULL,
+    FOREIGN KEY (product_id) REFERENCES products (id),
+    FOREIGN KEY (customer_id) REFERENCES customers (id)
+)
