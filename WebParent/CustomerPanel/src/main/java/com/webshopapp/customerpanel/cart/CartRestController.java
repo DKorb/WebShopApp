@@ -30,7 +30,6 @@ public class CartRestController {
         } catch (CustomerNotFoundException ex) {
             return "You must login to add product to cart.";
         }
-
     }
 
     private Customer getCustomer(HttpServletRequest request) throws CustomerNotFoundException {
@@ -41,5 +40,19 @@ public class CartRestController {
         }
 
         return customerService.getCustomerByEmail(customerEmail);
+    }
+
+    @PostMapping("/cart/update/{productId}/{quantity}")
+    public String updateQuantity(@PathVariable(name = "productId") Integer productId,
+                                   @PathVariable(name = "quantity") Integer quantity,
+                                   HttpServletRequest request) {
+        try {
+            Customer customer = getCustomer(request);
+            float subTotalPrice = cartService.updateQuantity(productId, quantity, customer);
+
+            return String.valueOf(subTotalPrice);
+        } catch (CustomerNotFoundException ex) {
+            return "You must login to change quantity of product.";
+        }
     }
 }
