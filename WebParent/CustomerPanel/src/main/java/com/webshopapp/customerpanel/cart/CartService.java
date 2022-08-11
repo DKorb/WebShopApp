@@ -55,4 +55,8 @@ public class CartService {
         return subTotalPrice;
     }
 
+    public void removeProduct(Customer customer, Integer productId) {
+        cartRepository.deleteByCustomerAndProduct(customer.getId(), productId);
+    }
+
 }

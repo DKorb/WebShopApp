@@ -24,12 +24,13 @@
                                     <div class="d-flex justify-content-between align-items-center mb-4">
                                         <div>
                                             <p class="mb-1"><b>Shopping cart</b></p>
-                                            <p class="mb-0" id="totalQuantity">You have [[${totalQuantity}]] items in your cart</p>
+                                            <p class="mb-0" id="totalQuantity">You have [[${totalQuantity}]] items in
+                                                your cart</p>
                                         </div>
                                     </div>
 
                                     <th:block th:each="item, status: ${cartItems}">
-                                        <div class="card mb-3">
+                                        <div class="card mb-3" th:id="'row' + ${status.count}">
                                             <div class="card-body">
                                                 <div class="d-flex justify-content-between">
                                                     <div class="d-flex flex-row align-items-center">
@@ -51,8 +52,10 @@
                                                                 th:id="'subTotalPrice' + ${item.product.id}">
                                                                 [[${item.subTotalPrice}]]</h5>
                                                         </div>
-                                                        <a href="#!" style="color: #DA0404;"><i
-                                                                class="fas fa-trash-alt"></i></a>
+                                                        <a class="fas fa-trash-alt linkRemove"
+                                                           th:href="@{'/cart/remove/' + ${item.product.id}}"
+                                                           th:rowNumber="${status.count}"
+                                                           style="color: #DA0404;"></a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -85,7 +88,7 @@
                                             <button type="button" class="btn btn-block btn-lg"
                                                     style="background-color: #733AFF;">
                                                 <div class="d-flex justify-content-between" style="color: white">
- <!--                                                   <span id="totalPrice">[[${totalPrice}]]</span>-->
+                                                    <!--                                                   <span id="totalPrice">[[${totalPrice}]]</span>-->
                                                     <span>CHECKOUT<i
                                                             class="fas fa-long-arrow-alt-right ms-2"></i></span>
                                                 </div>

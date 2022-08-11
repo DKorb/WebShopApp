@@ -4,9 +4,7 @@ import com.webshopapp.common.entity.customer.Customer;
 import com.webshopapp.common.exceptions.CustomerNotFoundException;
 import com.webshopapp.customerpanel.customer.CustomerService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -53,6 +51,20 @@ public class CartRestController {
             return String.valueOf(subTotalPrice);
         } catch (CustomerNotFoundException ex) {
             return "You must login to change quantity of product.";
+        }
+    }
+
+    @DeleteMapping("/cart/remove/{productId}")
+    public String removeProduct(@PathVariable("productId") Integer productId,
+                                HttpServletRequest request) {
+        try {
+            Customer customer = getCustomer(request);
+            cartService.removeProduct(customer, productId);
+
+            return "The product has been removed from your shopping cart.";
+
+        } catch (CustomerNotFoundException e) {
+            return "You must login to remove product.";
         }
     }
 }
