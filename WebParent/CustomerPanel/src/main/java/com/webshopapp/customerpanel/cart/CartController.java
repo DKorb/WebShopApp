@@ -24,16 +24,18 @@ public class CartController {
         Customer customer = getCustomer(request);
         List<Cart> cartItems = cartService.listCartItems(customer);
 
-        float subTotalPrice = 0.0F;
         float shippingPrice = 20;
+
+        float totalPrice = 0.0F;
+        float subTotalPrice = 0.0F;
+
         int totalQuantity  = 0;
 
         for (Cart item : cartItems) {
-            subTotalPrice += item.getProduct().getPrice();
             totalQuantity += item.getQuantity();
+            subTotalPrice += item.getSubTotalPrice();
+            totalPrice += item.getSubTotalPrice() + shippingPrice;
         }
-
-        float totalPrice = subTotalPrice + shippingPrice;
 
         model.addAttribute("cartItems", cartItems);
         model.addAttribute("subTotalPrice", subTotalPrice);
