@@ -30,7 +30,7 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
     public List<Role> listAllRoles() {
-        return (List<Role>) roleRepository.findAll();
+        return roleRepository.findAll();
     }
 
     public void save(User user) {
@@ -55,10 +55,7 @@ public class UserService {
 
     public boolean isEmailUnique(String email) {
         User userByEmail = userRepository.getUserByEmail(email);
-        if (userByEmail == null) {
-            return true;
-        }
-        return false;
+        return userByEmail == null;
     }
 
     public User getUser(Integer id) throws UserNotFoundException {

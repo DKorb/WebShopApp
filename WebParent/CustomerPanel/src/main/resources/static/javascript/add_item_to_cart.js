@@ -15,6 +15,6 @@ function addToCart() {
             xhr.setRequestHeader(csrfHeaderName, csrfValue);
         }
     }).done(function (response) {
-        alert(response);
+        showModal("Shopping cart", response);
     });
 }

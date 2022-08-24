@@ -1,7 +1,6 @@
 package com.webshopapp.common.entity.product;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 

@@ -2,7 +2,9 @@ package com.webshopapp.common.entity.user;
 
 
 import com.webshopapp.common.entity.role.Role;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -12,6 +14,8 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "users")
 public class User {
 
@@ -41,7 +45,8 @@ public class User {
     )
     private Set<Role> roles = new HashSet<>();
 
-    public User() {
+    public void addRole(Role role) {
+        this.roles.add(role);
     }
 
     public User(String email, String password, String firstName, String lastName) {
@@ -49,10 +54,6 @@ public class User {
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-    }
-
-    public void addRole(Role role) {
-        this.roles.add(role);
     }
 
     @Override
