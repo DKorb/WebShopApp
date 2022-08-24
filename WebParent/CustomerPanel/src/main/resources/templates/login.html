@@ -1,40 +1,48 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: page_head('none')"></head>
-<body style="background-color: #0C063F">
-<div class="container-fluid text-center">
-    <div>
-        <form th:action="@{/login}" method="post"
-              style="max-width: 450px; margin: 350px auto 0;">
+<head th:replace="fragments :: page_head('none')">
+    <title>WebShopApp Customer Panel</title>
+</head>
+<body>
+<div class="container-fluid">
 
-            <div>
-                <img th:src="@{/images/main_logo.png}" alt="logo"
-                     style="padding: 30px; max-width: 450px;">
-            </div>
+    <div th:replace="fragments :: navigation"></div>
 
-            <div th:if="${param.error}">
-                <p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
-            </div>
+    <div class="container-fluid text-center">
+        <div>
+            <form th:action="@{/login}" method="post"
+                  style="max-width: 450px; margin: 350px auto 0;">
 
-            <div th:if="${param.logout}">
-                <p class="text-warning">You have been logged out.</p>
-            </div>
-            <div>
-                <p>
-                    <input type="email" name="email" class="form-control" placeholder="Email address" required/>
-                </p>
+                <div>
+                    <img th:src="@{/images/main_logo.png}" alt="logo"
+                         style="padding: 30px; max-width: 450px;">
+                </div>
 
-                <p>
-                    <input type="password" name="password" class="form-control" placeholder="Password" required/>
-                </p>
+                <div th:if="${param.error}">
+                    <p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
+                </div>
 
-                <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
-            </div>
-        </form>
+                <div th:if="${param.logout}">
+                    <p class="text-warning">You have been logged out.</p>
+                </div>
+                <div>
+                    <p>
+                        <input type="email" name="email" class="form-control" placeholder="Email address" required/>
+                    </p>
+
+                    <p>
+                        <input type="password" name="password" class="form-control" placeholder="Password" required/>
+                    </p>
+
+                    <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+                </div>
+            </form>
+        </div>
+        <div class="text-center" style="color: white">
+            <p>Customer Login Panel - Copyright &copy; Dawid Korbecki</p>
+        </div>
     </div>
-    <div class="text-center" style="color: white">
-        <p>Customer Login Panel - Copyright &copy; Dawid Korbecki</p>
-    </div>
+
 </div>
 </body>
 </html>

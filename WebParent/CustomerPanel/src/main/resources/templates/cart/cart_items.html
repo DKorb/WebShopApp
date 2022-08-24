@@ -8,6 +8,8 @@
 
     <div th:replace="fragments :: navigation"></div>
 
+    <div th:replace="fragments :: modal_dialog"></div>
+
     <section class="h-100 h-custom">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
@@ -24,8 +26,9 @@
                                     <div class="d-flex justify-content-between align-items-center mb-4">
                                         <div>
                                             <p class="mb-1"><b>Shopping cart</b></p>
-                                            <p class="mb-0" id="totalQuantity">You have [[${totalQuantity}]] items in
+                                            <p class="mb-0">You have [[${totalQuantity}]] items in
                                                 your cart</p>
+<!--                                            <p class="mb-0" id="totalQuantity">0</p>-->
                                         </div>
                                     </div>
 
@@ -65,7 +68,7 @@
                                 <div class="col-lg-5">
 
                                     <div class="card text-white rounded-3" th:unless="${#lists.isEmpty(cartItems)}"
-                                         style="background-color: #A682FF;">
+                                         style="background-color: #A682FF;" id="sectionTotal">
                                         <div class="card-body">
 
                                             <hr class="my-4">
@@ -97,7 +100,7 @@
                                         </div>
                                     </div>
 
-                                    <div th:if="${#lists.isEmpty(cartItems)}">
+                                    <div id="sectionEmptyCartMessage" th:class="'text-center' + ${#lists.isEmpty(cartItems) ? '' : ' d-none'}">
                                         <h3>You have not chosen any products</h3>
                                     </div>
 
@@ -115,6 +118,7 @@
     <div class="text-center">
         <p>WebShop Customer Panel - Copyright &copy; Dawid Korbecki</p>
     </div>
+
 </div>
 <script type="text/javascript">
 
@@ -126,5 +130,6 @@
 </script>
 <script type="text/javascript" th:src="@{/javascript/logout.js}"></script>
 <script type="text/javascript" th:src="@{/javascript/shopping_cart.js}"></script>
+<script type="text/javascript" th:src="@{/javascript/modal_dialog.js}"></script>
 </body>
 </html>

@@ -1,6 +1,8 @@
 package com.webshopapp.common.entity.role;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -8,6 +10,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 @Table(name = "roles")
 public class Role {
 
@@ -18,15 +21,13 @@ public class Role {
     @Column(length = 24, nullable = false, unique = true)
     private String name;
 
-    public Role() {
+    public Role(Integer id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public Role(String name) {
         this.name = name;
-    }
-
-    public Integer getId() {
-        return id;
     }
 
     @Override

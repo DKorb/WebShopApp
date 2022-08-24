@@ -1,6 +1,8 @@
 package com.webshopapp.common.entity.category;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -8,6 +10,8 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "categories")
 public class Category {
 
@@ -31,13 +35,6 @@ public class Category {
         this.name = name;
         this.alias = name;
         this.image = "default.png";
-    }
-
-    public Category() {
-    }
-
-    public Category(Integer id) {
-        this.id = id;
     }
 
     @Transient

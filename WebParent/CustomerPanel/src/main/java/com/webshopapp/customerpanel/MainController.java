@@ -16,7 +16,6 @@ import java.util.List;
 @AllArgsConstructor
 public class MainController {
 
-
     private CategoryService categoryService;
 
     @GetMapping

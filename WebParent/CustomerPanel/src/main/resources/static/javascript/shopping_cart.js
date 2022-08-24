@@ -8,7 +8,6 @@ $(document).ready(function() {
     $(".linkPlus").on("click", function(evt) {
         evt.preventDefault();
         increaseQuantity($(this));
-        totalQuantity += 1;
     });
 
     $(".linkRemove").on("click", function(evt) {
@@ -53,7 +52,7 @@ function updateQuantity(productId, quantity) {
         updateSubTotalPrice(response, productId)
         updateTotalPrice();
     }).fail(function () {
-        alert("Error while updating product to shopping cart.");
+        showModal("Shopping cart", "Error while updating product to shopping cart.")
     });
 }
 
@@ -65,6 +64,7 @@ function updateSubTotalPrice(updatedSubTotal, productId) {
 function updateTotalPrice() {
     total = 0.0;
     shipping = 0.0;
+    productQuantity = 0;
 
     $("#shippingPrice").each(function (index, element) {
         shipping = parseFloat(element.innerHTML);
@@ -73,13 +73,20 @@ function updateTotalPrice() {
 
     $(".subTotalPrice").each(function (index, element) {
         total += parseFloat(element.innerHTML);
+        productQuantity++;
     });
 
-    $("#subTotalPrice").text(total);
+    if (productQuantity < 1) {
+        showEmptyShoppingCart();
+    } else {
+        total += shipping;
+        $("#totalPrice").text(total);
+    }
+}
 
-    total += shipping;
-
-    $("#totalPrice").text(total);
+function showEmptyShoppingCart() {
+    $("#sectionTotal").hide();
+    $("#sectionEmptyCartMessage").removeClass("d-none");
 }
 
 function removeProduct(link) {
@@ -95,10 +102,10 @@ function removeProduct(link) {
         rowNumber = link.attr("rowNumber");
         removeProductHTML(rowNumber);
         updateTotalPrice();
-        alert(response);
+        showModal("Shopping cart", response)
 
     }).fail(function(response) {
-        alert(response);
+        showModal("Shopping cart", response)
     });
 }
 
