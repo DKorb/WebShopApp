@@ -1,12 +1,14 @@
 package com.webshopapp.adminpanel.order;
 
 import com.webshopapp.common.entity.order.Order;
+import com.webshopapp.common.exceptions.OrderNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -39,6 +41,19 @@ public class OrderController {
         model.addAttribute("orderList", orderList);
 
         return "orders/orders";
+    }
+
+    @GetMapping("/orders/delete/{id}")
+    public String deleteOrder(@PathVariable(name = "id") Integer id,
+                                 RedirectAttributes redirectAttributes) {
+        try {
+            orderService.deleteOrder(id);
+            redirectAttributes.addFlashAttribute("message", "The order ID " + id
+                    + " has been deleted successfully");
+        } catch (OrderNotFoundException ex) {
+            redirectAttributes.addFlashAttribute("message", ex.getMessage());
+        }
+        return "redirect:/orders";
     }
 
 }
