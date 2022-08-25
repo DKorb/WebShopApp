@@ -44,4 +44,14 @@ public class Customer {
     @Column(nullable = false, length = 64)
     private String address;
 
+    @Transient
+    public String getCustomerFullName() {
+        return firstName + " " + lastName;
+    }
+
+    @Transient
+    public String getCustomerFullAddress() {
+        return address + ", " + city;
+    }
+
 }
