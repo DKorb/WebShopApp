@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content" th:remove="tag">
+    <div id="product">
+        <div class="row">
+            <th:block th:each="details : ${order.orderDetails}">
+                <div class="col-lg-3 text-center" th:with="product = ${details.product}">
+                    <input type="hidden" name="productId" th:value="${product.id}"/>
+
+                    <div class="row m-1">
+                        <div class="card mb-3"
+                             style="height: 250px; width: 400px; display: block; margin-left: auto; margin-right: auto">
+                            <img class="mt-4" th:src="@{${product.imagePath}}" style="width: 150px"/>
+                            <br/>
+                            <b>[[${product.name}]]</b>
+                            <div>
+                                <span>Product cost: <b>[[${product.price}]]</b></span>
+                                <br>
+                                <span>Product Quantity: <b>[[${details.quantity}]]</b></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+        </div>
+    </div>
+</div>
