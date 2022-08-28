@@ -1,8 +1,6 @@
 package com.webshopapp.adminpanel.order;
 
-import com.webshopapp.common.entity.customer.Customer;
 import com.webshopapp.common.entity.order.Order;
-import com.webshopapp.common.exceptions.CustomerNotFoundException;
 import com.webshopapp.common.exceptions.OrderNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -11,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.NoSuchElementException;
 
 @Service
 @Transactional
@@ -34,6 +33,14 @@ public class OrderService {
         }
 
         orderRepository.deleteById(id);
+    }
+
+    public Order getOrder(Integer orderId) throws OrderNotFoundException {
+        try {
+            return orderRepository.findById(orderId).get();
+        } catch (NoSuchElementException ex) {
+            throw new OrderNotFoundException("Could not find any orders with ID " + orderId);
+        }
     }
 
 }

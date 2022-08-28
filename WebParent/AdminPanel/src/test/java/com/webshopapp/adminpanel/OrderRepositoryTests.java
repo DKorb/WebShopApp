@@ -41,7 +41,9 @@ public class OrderRepositoryTests {
     public void testAddNewOrder() {
 
         Customer customer = testEntityManager.find(Customer.class, 1);
-        Product product = testEntityManager.find(Product.class, 1);
+
+        Product firstProduct = testEntityManager.find(Product.class, 1);
+        Product secondProduct = testEntityManager.find(Product.class, 2);
 
         Order order = new Order();
 
@@ -51,25 +53,29 @@ public class OrderRepositoryTests {
         order.setPhoneNumber(customer.getPhoneNumber());
         order.setAddress(customer.getAddress());
         order.setCity(customer.getCity());
-        order.setProductCost(product.getPrice());
+        order.setProductCost(firstProduct.getPrice() + secondProduct.getPrice());
         order.setPaymentMethod(PaymentMethod.CREDIT_CARD);
         order.setOrderStatus(OrderStatus.NEW);
         order.setOrderTime(new Date());
 
-        OrderDetail orderDetail = new OrderDetail();
+        OrderDetail firstOrder = new OrderDetail();
 
-        orderDetail.setProduct(product) ;
-        orderDetail.setProductCost(product.getPrice());
-        orderDetail.setOrder(order);
-        orderDetail.setQuantity(1);
+        firstOrder.setProduct(firstProduct) ;
+        firstOrder.setProductCost(firstProduct.getPrice());
+        firstOrder.setOrder(order);
+        firstOrder.setQuantity(1);
 
-        order.getOrderDetails().add(orderDetail);
+        OrderDetail secondOrder = new OrderDetail();
 
+        secondOrder.setProduct(secondProduct) ;
+        secondOrder.setProductCost(secondProduct.getPrice());
+        secondOrder.setOrder(order);
+        secondOrder.setQuantity(1);
 
-        log.error(String.valueOf(order));
+        order.getOrderDetails().add(firstOrder);
+        order.getOrderDetails().add(secondOrder);
 
         Order newOrder = orderRepository.save(order);
-
 
         assertThat(newOrder.getId()).isGreaterThan(0);
 

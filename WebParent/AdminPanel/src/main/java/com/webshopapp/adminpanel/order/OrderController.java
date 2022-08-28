@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+
 import java.util.List;
 
 @Controller
@@ -54,6 +55,20 @@ public class OrderController {
             redirectAttributes.addFlashAttribute("message", ex.getMessage());
         }
         return "redirect:/orders";
+    }
+
+    @GetMapping("/orders/detail/{id}")
+    public String viewOrderDetails(@PathVariable("id") Integer id,
+                                   Model model,
+                                   RedirectAttributes redirectAttributes) {
+        try {
+            Order order = orderService.getOrder(id);
+            model.addAttribute(order);
+            return "orders/order_details";
+        } catch (OrderNotFoundException ex) {
+            redirectAttributes.addFlashAttribute("message", ex.getMessage());
+            return "redirect:/orders";
+        }
     }
 
 }
