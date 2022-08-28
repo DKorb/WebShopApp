@@ -39,7 +39,7 @@
                     [[${order.orderTime}]]
                 </td>
                 <td>
-                    [[${order.customer.getCustomerFullAddress}]]
+                    [[${order.customer.customerFullAddress}]]
                 </td>
                 <td>
                     [[${order.paymentMethod}]]
@@ -55,8 +55,9 @@
                           th:text="${order.orderStatus}"></span>
                 </td>
                 <td>
-                    <a type="button" class="btn btn-link btn-sm btn-rounded" th:href="@{'/orders/edit/' + ${order.id}}">
-                        Edit
+                    <a type="button" class="btn btn-link btn-sm btn-rounded"
+                       th:href="@{'/orders/detail/' + ${order.id}}">
+                        View
                     </a>
                     <a type="button" class="btn btn-link btn-sm btn-rounded"
                        th:href="@{'/orders/delete/' + ${order.id}}">

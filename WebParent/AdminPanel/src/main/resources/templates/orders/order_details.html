@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <head th:replace="fragments :: page_head('tag')"></head>
+</head>
+<body>
+<div class="container-fluid">
+
+    <div th:replace="fragments :: navigation"></div>
+
+    <div class="text-center">
+        <h2 class="bold">[[${pageTitle}]]</h2>
+    </div>
+    <form th:action="@{/orders/save}" method="post" enctype="multipart/form-data"
+          th:object="${order}" style="max-width: 1100px; margin: 0 auto">
+        <input type="hidden" th:field="*{id}"/>
+        <div class="border border-5 rounded p-3 m-5">
+
+            <nav class="nav justify-content-center">
+                <div class="nav nav-tabs mb-3" id="myTab" role="tablist">
+                    <button class="nav-link active" id="overview" data-bs-toggle="tab" data-bs-target="#nav-overview"
+                            type="button" role="tab" aria-controls="nav-home" aria-selected="true">Overview
+                    </button>
+                    <button class="nav-link" id="description" data-bs-toggle="tab" data-bs-target="#nav-products"
+                            type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Products
+                    </button>
+                </div>
+            </nav>
+
+           <div class="tab-content" id="nav-tabContent">
+
+                <div class="tab-pane fade show active p-3" id="nav-overview" role="tabpanel"
+                     aria-labelledby="overview">
+                    <div th:replace="orders/order_overview :: content"></div>
+                </div>
+                <div class="tab-pane fade" id="nav-products" role="tabpanel"
+                     aria-labelledby="nav-profile-tab">
+                    <div th:replace="orders/order_products :: content"></div>
+                </div>
+
+
+                <div class="text-center">
+                    <div class="m-3">
+                        <input type="button" value="CANCEL" class="btn btn-warning" id="buttonCancel"/>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    exitURL = "[[@{/orders}]]";
+</script>
+<script th:src="@{/javascript/logout.js}"></script>
+<div th:replace="fragments :: scripts"></div>
+</body>
+</html>
