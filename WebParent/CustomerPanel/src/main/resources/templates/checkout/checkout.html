@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: page_head('none')">
+    <title>WebShopApp Customer Panel</title>
+</head>
+<body>
+<div class="container-fluid">
+
+    <div th:replace="fragments :: navigation"></div>
+
+    <div th:replace="fragments :: modal_dialog"></div>
+
+    <section class="h-100 h-custom">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="row m-1">
+
+                    <div class="col-sm-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-3"><a th:href="@{/cart}" class="text-body"><i
+                                        class="fas fa-long-arrow-alt-left me-2"></i>BACK</a></h5>
+                                <hr>
+                                <h5>Delivery information</h5>
+                                <p>[[${customer.address}]]</p>
+                                <p>[[${customer.city}]]</p>
+                                <p><b>Address: </b></p>
+                                <p>[[${customer.customerFullAddress}]]</p>
+                                <p>
+                                    <b>Days to delivery: </b> [[${checkout.deliveryDays}]] day(s)
+                                </p>
+                                <p>
+                                    <b>Expected delivery date: </b>
+                                    [[${#dates.format(checkout.deliveryDate, 'E dd MMM yyyy')}]]
+                                </p>
+                            </div>
+                            <div class="card-body">
+                            </div>
+                        </div>
+
+<!--                        <div class="card mt-3 mb-3">-->
+<!--                            <div class="card-header">-->
+<!--                                <h5>Payment Method</h5>-->
+<!--                            </div>-->
+<!--                            <div class="card-body">-->
+<!--                            </div>-->
+<!--                        </div>-->
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Order Summery</h5>
+                            </div>
+                            <div class="card-body">
+                                <table>
+                                    <th:block th:each="item : ${cartItems}">
+                                        <tr>
+                                            <td>
+                                                [[${item.quantity}]]
+                                            </td>
+                                            <td width="70%">
+                                                <a> [[${item.product.name}]]</a>
+                                            </td>
+                                        </tr>
+                                    </th:block>
+                                </table>
+                                <div class="row mt-2">
+                                    <hr>
+                                    <div class="col">Total products cost:</div>
+                                    <div class="col"><b>[[${checkout.productCost}]]</b></div>
+                                </div>
+                            </div>
+                            <form name="form" th:action="@{/checkout/save}" th:object="${order}" method="post">
+                                <input type="hidden" th:field="*{id}"/>
+
+
+
+
+                                <button type="submit" class="btn btn-block btn-lg"
+                                        style="background-color: #733AFF;">
+                                    <div style="color: white">
+                                        <span style="text-align: center">ORDER NOW</span>
+                                    </div>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<div class="text-center">
+    <p>WebShop Customer Panel - Copyright &copy; Dawid Korbecki</p>
+</div>
+
+<script type="text/javascript">
+
+    contextPath = "[[@{/}]]";
+
+    csrfHeaderName = "[[${_csrf.headerName}]]";
+    csrfValue = "[[${_csrf.token}]]";
+
+</script>
+<script type="text/javascript" th:src="@{/javascript/logout.js}"></script>
+<script type="text/javascript" th:src="@{/javascript/modal_dialog.js}"></script>
+</body>
+</html>
