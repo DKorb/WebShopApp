@@ -32,7 +32,15 @@ public class Cart {
     private int quantity;
 
     @Transient
+    private final float shippingCost = 20;
+
+    @Transient
     public float getSubTotalPrice() {
         return product.getPrice() * quantity;
+    }
+
+    @Transient
+    public float getShippingCost() {
+        return shippingCost;
     }
 }

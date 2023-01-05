@@ -28,7 +28,7 @@
                                             <p class="mb-1"><b>Shopping cart</b></p>
                                             <p class="mb-0">You have [[${totalQuantity}]] items in
                                                 your cart</p>
-<!--                                            <p class="mb-0" id="totalQuantity">0</p>-->
+                                            <!--                                            <p class="mb-0" id="totalQuantity">0</p>-->
                                         </div>
                                     </div>
 
@@ -87,20 +87,24 @@
                                                 <p class="mb-2">Total Price</p>
                                                 <p class="mb-2" id="totalPrice">[[${totalPrice}]]</p>
                                             </div>
+                                            <form name="form" th:action="@{/checkout}">
+                                                <button type="submit" class="btn btn-block btn-lg"
+                                                        style="background-color: #733AFF;">
+                                                    <div class="d-flex justify-content-between" style="color: white">
+                                                        <!--                                                   <span id="totalPrice">[[${totalPrice}]]</span>-->
+                                                        <span>CHECKOUT
+                                                            <i class="fas fa-long-arrow-alt-right ms-2"></i>
+                                                        </span>
 
-                                            <button type="button" class="btn btn-block btn-lg"
-                                                    style="background-color: #733AFF;">
-                                                <div class="d-flex justify-content-between" style="color: white">
-                                                    <!--                                                   <span id="totalPrice">[[${totalPrice}]]</span>-->
-                                                    <span>CHECKOUT<i
-                                                            class="fas fa-long-arrow-alt-right ms-2"></i></span>
-                                                </div>
-                                            </button>
+                                                    </div>
+                                                </button>
+                                            </form>
 
                                         </div>
                                     </div>
 
-                                    <div id="sectionEmptyCartMessage" th:class="'text-center' + ${#lists.isEmpty(cartItems) ? '' : ' d-none'}">
+                                    <div id="sectionEmptyCartMessage"
+                                         th:class="'text-center' + ${#lists.isEmpty(cartItems) ? '' : ' d-none'}">
                                         <h3>You have not chosen any products</h3>
                                     </div>
 

@@ -5,6 +5,7 @@ import com.webshopapp.common.entity.brand.Brand;
 import com.webshopapp.common.entity.category.Category;
 import com.webshopapp.common.entity.product.Product;
 import com.webshopapp.adminpanel.product.ProductRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -18,8 +19,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@Slf4j
 @Rollback(false)
-public class ProductRepositoryTests {
+class ProductRepositoryTests {
 
     @Autowired
     private ProductRepository productRepository;
@@ -29,7 +31,7 @@ public class ProductRepositoryTests {
 
 
     @Test
-    public void testCreateProduct() {
+    void testCreateProduct() {
         Brand brand = testEntityManager.find(Brand.class, 7);
         Category category = testEntityManager.find(Category.class, 2);
 
@@ -48,25 +50,25 @@ public class ProductRepositoryTests {
         Product testProduct = productRepository.save(product);
 
         assertThat(testProduct).isNotNull();
-        assertThat(testProduct.getId()).isGreaterThan(0);
+        assertThat(testProduct.getId()).isPositive();
     }
 
     @Test
-    public void testListAllProducts() {
+    void testListAllProducts() {
         Iterable<Product> allProducts = productRepository.findAll();
-        allProducts.forEach(System.out::println);
+        log.info(allProducts.toString());
     }
 
     @Test
-    public void testGetProduct() {
+    void testGetProduct() {
         Integer productID = 1;
         Product foundProduct = productRepository.findById(productID).get();
-        System.out.println(foundProduct);
+        log.info("Product: {}", foundProduct);
         assertThat(foundProduct).isNotNull();
     }
 
     @Test
-    public void testSaveProductWithDetails() {
+    void testSaveProductWithDetails() {
         Product product = productRepository.findById(1).get();
 
         product.addDetails("SIM card", "Dual SIM");

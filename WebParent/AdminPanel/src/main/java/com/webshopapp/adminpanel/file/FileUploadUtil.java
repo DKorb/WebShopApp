@@ -1,5 +1,6 @@
 package com.webshopapp.adminpanel.file;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -9,6 +10,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
+@Slf4j
 public class FileUploadUtil {
 
     public static void saveFile(String uploadDir,
@@ -37,12 +39,12 @@ public class FileUploadUtil {
                     try {
                         Files.delete(file);
                     } catch (IOException ex) {
-                        System.out.println("Could not delete file:" + file);
+                        log.info("Could not delete file: {}", file);
                     }
                 }
             });
         } catch (IOException ex) {
-            System.out.println("Could not list directory" + dirPath);
+            log.info("Could not list directory: {}", dirPath);
         }
     }
 }

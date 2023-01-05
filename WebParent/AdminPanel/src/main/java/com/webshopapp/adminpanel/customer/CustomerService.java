@@ -1,9 +1,7 @@
 package com.webshopapp.adminpanel.customer;
 
 import com.webshopapp.common.entity.customer.Customer;
-import com.webshopapp.common.entity.user.User;
 import com.webshopapp.common.exceptions.CustomerNotFoundException;
-import com.webshopapp.common.exceptions.UserNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

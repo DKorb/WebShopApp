@@ -15,6 +15,10 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    private static final String ADMIN = "Admin";
+
+    private static final String SUPPLIER = "Supplier";
+
     @Bean
     public UserDetailsService userDetailsService() {
         return new SecurityUserDetailsService();
@@ -28,11 +32,12 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/users/**").hasAnyAuthority("Admin")
-                .antMatchers("/categories/**", "/brands/**").hasAnyAuthority("Admin")
-                .antMatchers("/products/**").hasAnyAuthority("Admin", "Supplier")
-                .antMatchers("/customers/**").hasAnyAuthority("Admin", "Supplier")
-                .antMatchers("/orders/**").hasAnyAuthority("Admin", "Supplier")
+                .antMatchers("/users/**").hasAnyAuthority(ADMIN)
+                .antMatchers("/categories/**", "/brands/**").hasAnyAuthority(ADMIN)
+                .antMatchers("/products/**").hasAnyAuthority(ADMIN, SUPPLIER)
+                .antMatchers("/customers/**").hasAnyAuthority(ADMIN, SUPPLIER)
+                .antMatchers("/orders/**").hasAnyAuthority(ADMIN, SUPPLIER)
+                .antMatchers("/reports/**").hasAnyAuthority(ADMIN, SUPPLIER)
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

@@ -24,7 +24,9 @@ public class CartController {
         Customer customer = getCustomer(request);
         List<Cart> cartItems = cartService.listCartItems(customer);
 
-        float shippingPrice = 20;
+        Cart cart = new Cart();
+
+        float shippingPrice = cart.getShippingCost();
 
         float totalPrice = 0.0F;
         float subTotalPrice = 0.0F;
